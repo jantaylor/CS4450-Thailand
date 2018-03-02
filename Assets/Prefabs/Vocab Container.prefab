@@ -396,6 +396,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3fba6abbe629247828fd6350216e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roundNumber: 1
   englishWords: []
   thaiWords: []
   englishAudioClips: []

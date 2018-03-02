@@ -1,0 +1,42 @@
+{
+  "languages": ["engl_uk", "thai"],
+  "audioRoot": "Sounds",
+  "audioFile": "{LANG}_{WORD}",
+  "imageFile": "vocab_{WORD}",
+  "vocab": [
+    {
+      "language": "engl_uk",
+      "words":
+      [
+        "hot",
+        "cold",
+        "happy",
+        "secret",
+        "uncle",
+        "aunt",
+        "outside",
+        "inside",
+        "present",
+        "squirt",
+        "wet"
+      ]
+    },
+    {
+      "language": "thai",
+      "words":
+      [
+        "ร้อน",
+        "หนาว",
+        "มีความสุข",
+        "ไต๋",
+        "ลุง",
+         "ป้า",
+        "ภายนอก",
+        "ภายใน",
+        "ของขวัญ",
+        "ฉีด",
+        "เปียก"
+      ]
+    }
+  ]
+}
