@@ -1,0 +1,59 @@
+{
+  "languages": ["engl_uk", "thai"],
+  "audioRoot": "Sounds",
+  "audioFile": "{LANG}_{WORD}",
+  "imageFile": "vocab_{WORD}",
+  "vocab": [
+    {
+      "language": "engl_uk",
+      "words":
+      [
+        "hot",
+        "cold",
+        "happy",
+        "secret",
+        "uncle",
+        "aunt",
+        "outside",
+        "inside",
+        "present",
+        "squirt",
+        "wet",
+        "night",
+        "talk",
+        "open",
+        "water gun",
+        "water",
+        "water fight",
+        "book",
+        "birthday cake",
+        "soccer ball"
+      ]
+    },
+    {
+      "language": "thai",
+      "words": [
+        "ร้อน",
+        "หนาว",
+        "มีความสุข",
+        "ไต๋",
+        "ลุง",
+        "ป้า",
+        "ภายนอก",
+        "ภายใน",
+        "ของขวัญ",
+        "ฉีด",
+        "เปียก",
+        "กลางคืน",
+        "การพูดคุย",
+        "เปิด",
+        "ปืนฉีดน้ำ",
+        "น้ำ",
+        "ต่อสู้น้ำ",
+        "หนังสือ",
+        "เค้กวันเกิด",
+        "ลูกฟุตบอล"
+      ]
+    }
+  ]
+}
