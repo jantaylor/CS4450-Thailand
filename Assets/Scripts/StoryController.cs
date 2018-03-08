@@ -4,107 +4,50 @@ using UnityEngine;
 
 public class StoryController : MonoBehaviour {
 
-	public int currentRound;
-	public string[] englishSentences;
-	public string[] thaiSentences;
-	public AudioClip[] englishAudioClips;
-	public AudioClip[] thaiAudioClips;
+    /// <summary>
+    /// The audiosource for playing sound
+    /// </summary>
+    public AudioSource audioSource;
 
-	private SentenceController englishSentence;
-	private SentenceController thaiSentence;
-	private GameObject image;
-	private int currentIndex;
-	private string sentenceJsonFile;
-	private SentenceResource sentenceJsonObject;
+    /// <summary>
+    /// The first word that is read separately
+    /// </summary>
+    public AudioClip word;
 
-	[System.Serializable]
-	public class SentenceResource
-	{
-		public string[] languages;
-		public string audioRoot;
-		public string audioFile;
-		public string imageFile;
-		public StoryList[] story;
+    /// <summary>
+    /// The second word that is read separately
+    /// </summary>
+    public AudioClip word2;
 
-		public List<string> GetAudioPaths(int index)
-		{
-			List<string> paths = new List<string>();
-			string sentence = null;
-			foreach (var s in story)
-			{
-                sentence = (sentence == null) ? s.sentences[index] : sentence;
-				string path = audioFile.Replace("{LANG}", s.language).Replace("{SENTENCE}", sentence);
-				paths.Add(path);
-			}
-			return paths;
-		}
+    /// <summary>
+    /// The sentence that is read
+    /// </summary>
+    public AudioClip sentence;
 
-		public List<string> GetImagePaths(int index)
-		{
-			List<string> paths = new List<string>();
-			string sentence = null;
-			foreach (var s in story)
-			{
-                sentence = (sentence == null) ? s.sentences[index] : sentence;
-				string path = imageFile.Replace("{WORD}", sentence);
-				paths.Add(path);
-			}
-			return paths;
-		}
+    /// <summary>
+    /// Play Word
+    /// </summary>
+    public void PlayWordOne() {
+        if (audioSource.isPlaying)
+            audioSource.Stop();
+        audioSource.PlayOneShot(word);
+    }
 
-		public override string ToString()
-		{
-			return "audioRoot: " + audioRoot + "; audioFile: " + audioFile + "; sentence: " + story.ToString();
-		}
-	};
+    /// <summary>
+    /// Play Word 2
+    /// </summary>
+    public void PlayWordTwo() {
+        if (audioSource.isPlaying)
+            audioSource.Stop();
+        audioSource.PlayOneShot(word2);
+    }
 
-	[System.Serializable]
-	public class StoryList
-	{
-		public string language;
-		public string[] sentences;
-
-		public override string ToString()
-		{
-			return sentences.ToString();
-		}
-	};
-
-
-	// Use this for initialization
-	void Start () {
-		currentIndex = 0;
-        englishSentence = GetComponentsInChildren<SentenceController>()[0];
-        thaiSentence = GetComponentsInChildren<SentenceController>()[1];
-		LoadJson();
-		Proceed(0);
-	}
-
-	// Update is called once per frame
-	void Update () {
-
-	}
-
-	public void LoadJson()
-	{
-        sentenceJsonFile = Resources.Load<TextAsset>("Round" + currentRound + "Story").text;
-        sentenceJsonObject = JsonUtility.FromJson<SentenceResource>(sentenceJsonFile);
-	}
-
-	public bool Proceed (int i)
-	{
-		Debug.Log("Proceed " + i + ": " + (currentIndex + i));
-		if (currentIndex + i > -1 && currentIndex + i < sentenceJsonObject.story[0].sentences.Length)
-		{
-			currentIndex += i;
-			Debug.Log("Index: " + currentIndex + " + " + i);
-			var audioPaths = sentenceJsonObject.GetAudioPaths(currentIndex);
-			var imagePaths = sentenceJsonObject.GetImagePaths(currentIndex);
-            englishSentence.UpdateSentence(sentenceJsonObject.story[0].sentences[currentIndex], audioPaths[0], imagePaths[0]);
-            thaiSentence.UpdateSentence(sentenceJsonObject.story[1].sentences[currentIndex], audioPaths[1], imagePaths[1]);
-
-			return true;
-		}
-		return false;
-	}
+    /// <summary>
+    /// Play sentence
+    /// </summary>
+    public void PlaySentence() {
+        if (audioSource.isPlaying)
+            audioSource.Stop();
+        audioSource.PlayOneShot(sentence);
+    }
 }
