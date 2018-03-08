@@ -14,7 +14,7 @@ public class SentenceController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		image = GameObject.Find("Vocab Image").GetComponent<SpriteRenderer>();
+		image = GameObject.Find("Story Image").GetComponent<SpriteRenderer>();
 		audioPlayer = GameObject.Find("Audio Player");
 		textMesh = GetComponent<TextMesh>();
 		box = GetComponent<BoxCollider2D>();

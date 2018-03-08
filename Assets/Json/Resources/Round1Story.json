@@ -1,0 +1,20 @@
+{
+  "languages": ["engl_uk", "thai"],
+  "audioRoot": "Sounds",
+  "audioFile": "{LANG}_{SENTENCE}",
+  "imageFile": "story_{SENTENCE}",
+  "story": [
+    {
+      "language": "engl_uk",
+      "sentences": [
+        "It is very hot in Thailand. But Kiet is happy."
+      ]
+    },
+    {
+      "language": "thai",
+      "sentences": [
+        "ร้อน หนาว มีความสุข ภายนอก มีความสุข"
+      ]
+    }
+  ]
+}

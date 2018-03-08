@@ -87,7 +87,7 @@ public class StoryController : MonoBehaviour {
 
 	public void LoadJson()
 	{
-        sentenceJsonFile = Resources.Load<TextAsset>("Round" + currentRound + "Sentence").text;
+        sentenceJsonFile = Resources.Load<TextAsset>("Round" + currentRound + "Story").text;
         sentenceJsonObject = JsonUtility.FromJson<SentenceResource>(sentenceJsonFile);
 	}
 
