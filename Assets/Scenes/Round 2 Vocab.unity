@@ -374,7 +374,7 @@ Prefab:
     - target: {fileID: 114295051092716596, guid: 4323529a1a5230746966806b7007badb,
         type: 2}
       propertyPath: currentRound
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 212719516093810768, guid: 4323529a1a5230746966806b7007badb,
         type: 2}
