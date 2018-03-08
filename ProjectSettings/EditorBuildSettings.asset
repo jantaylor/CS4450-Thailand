@@ -12,6 +12,18 @@ EditorBuildSettings:
     path: Assets/Scenes/Round 1 Story 2.unity
     guid: 3558bbacc3778f5419da9f0aabbca361
   - enabled: 1
+    path: Assets/Scenes/Round 1 Story 3.unity
+    guid: 26998136ecc3c4f49a98b81a31662f8b
+  - enabled: 1
+    path: Assets/Scenes/Round 1 Story 4.unity
+    guid: 600405683bb19c841885a77c771fad42
+  - enabled: 1
+    path: Assets/Scenes/Round 1 Story 5.unity
+    guid: 3e186f2e882711d4080e503f5c6557ff
+  - enabled: 1
+    path: Assets/Scenes/Round 1 Story 6.unity
+    guid: 65fa8eeb86c35a342b30ce50b5e98c14
+  - enabled: 1
     path: Assets/Scenes/Round 1 Vocab.unity
     guid: 8765a68f1a2e27945b66c729cb610ee0
   - enabled: 1

@@ -18,7 +18,11 @@ public class GameState : MonoBehaviour {
 
     private string[] scenes = new string[] {
         "Round 1 Story 1",
-        "Round 1 Story 2"
+        "Round 1 Story 2",
+        "Round 1 Story 3",
+        "Round 1 Story 4",
+        "Round 1 Story 5",
+        "Round 1 Story 6"
     };
 
     /// <summary>
