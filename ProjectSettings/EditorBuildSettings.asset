@@ -4,4 +4,16 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Round 1 Story 1.unity
+    guid: f51d5078b3249d94bb0428bbe96541a2
+  - enabled: 1
+    path: Assets/Scenes/Round 1 Story 2.unity
+    guid: 3558bbacc3778f5419da9f0aabbca361
+  - enabled: 1
+    path: Assets/Scenes/Round 1 Vocab.unity
+    guid: 8765a68f1a2e27945b66c729cb610ee0
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Vocab.unity
+    guid: e61a0870ef355ab4aac68bc44526057a
