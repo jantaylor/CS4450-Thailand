@@ -22,7 +22,9 @@ public class GameState : MonoBehaviour {
         "Round 1 Story 3",
         "Round 1 Story 4",
         "Round 1 Story 5",
-        "Round 1 Story 6"
+        "Round 1 Story 6",
+        "Round 1 Story 7",
+        "Round 1 Story 8"
     };
 
     /// <summary>
