@@ -274,7 +274,7 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!1001 &666895507
+--- !u!1001 &904852568
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -371,25 +371,18 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1967491862694272, guid: 4323529a1a5230746966806b7007badb, type: 2}
+      propertyPath: m_Name
+      value: Vocab Container
+      objectReference: {fileID: 0}
     - target: {fileID: 114295051092716596, guid: 4323529a1a5230746966806b7007badb,
         type: 2}
       propertyPath: currentRound
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 212719516093810768, guid: 4323529a1a5230746966806b7007badb,
-        type: 2}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f50e1f780bac4d849943ea52d5c72d9f,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4323529a1a5230746966806b7007badb, type: 2}
   m_IsPrefabParent: 0
---- !u!224 &757496877 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224609658147284802, guid: 4323529a1a5230746966806b7007badb,
-    type: 2}
-  m_PrefabInternal: {fileID: 666895507}
 --- !u!1 &1057824348
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,6 +638,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!224 &1629262303 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224609658147284802, guid: 4323529a1a5230746966806b7007badb,
+    type: 2}
+  m_PrefabInternal: {fileID: 904852568}
 --- !u!1 &1772868560
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +713,7 @@ RectTransform:
   m_Children:
   - {fileID: 1067222478}
   - {fileID: 1473571368}
-  - {fileID: 757496877}
+  - {fileID: 1629262303}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

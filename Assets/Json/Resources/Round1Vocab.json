@@ -2,6 +2,7 @@
   "languages": ["engl_uk", "thai"],
   "audioRoot": "Sounds",
   "audioFile": "{LANG}_{WORD}",
+  "definitionAudioFile": "Definitions/{LANG}_{WORD}",
   "imageFile": "vocab_{WORD}",
   "vocab": [
     {
@@ -19,6 +20,20 @@
         "present",
         "squirt",
         "wet"
+      ],
+      "definitions":
+      [
+        "at a high temperature",
+        "at a low temperature",
+        "feeling good",
+        "not known to others",
+        "brother of a parent",
+        "sister of a parent",
+        "not inside",
+        "not outside",
+        "a gift; something given to another",
+        "to spray; usually with water",
+        "having water"
       ]
     },
     {
@@ -36,6 +51,20 @@
         "ของขวัญ",
         "ฉีด",
         "เปียก"
+      ],
+      "definitions":
+      [
+        "ร้อน ร้อน ร้อน ร้อน ร้อน",
+        "หนาว หนาว หนาว หนาว หนาว",
+        "มีความสุข มีความสุข มีความสุข มีความสุข มีความสุข",
+        "ไต๋ ไต๋ ไต๋ ไต๋ ไต๋",
+        "ลุง ลุง ลุง ลุง ลุง",
+         "ป้า ป้า ป้า ป้า ป้า",
+        "ภายนอก ภายนอก ภายนอก ภายนอก ภายนอก",
+        "ภายใน ภายใน ภายใน ภายใน ภายใน",
+        "ของขวัญ ของขวัญ ของขวัญ ของขวัญ ของขวัญ",
+        "ฉีด ฉีด ฉีด ฉีด ฉีด",
+        "เปียก เปียก เปียก เปียก เปียก"
       ]
     }
   ]

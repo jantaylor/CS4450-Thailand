@@ -2,6 +2,7 @@
   "languages": ["engl_uk", "thai"],
   "audioRoot": "Sounds",
   "audioFile": "{LANG}_{WORD}",
+  "definitionAudioFile": "Definitions/{LANG}_{WORD}",
   "imageFile": "vocab_{WORD}",
   "vocab": [
     {
@@ -28,6 +29,29 @@
         "book",
         "birthday cake",
         "soccer ball"
+      ],
+      "definitions":
+      [
+        "at a high temperature",
+        "at a low temperature",
+        "feeling good",
+        "not known to others",
+        "brother of a parent",
+        "sister of a parent",
+        "not inside",
+        "not outside",
+        "a gift; something given to another",
+        "to spray; usually with water",
+        "having water",
+        "when the sun goes down",
+        "make words with your mouth",
+        "show the inside",
+        "toy that squirts water",
+        "the common liquid",
+        "when two or more people squirt each other with water",
+        "a group of related papers bound together",
+        "a cake to celebrate one's birthday (the cake is a lie)",
+        "a ball used to play soccer"
       ]
     },
     {
@@ -53,6 +77,28 @@
         "หนังสือ",
         "เค้กวันเกิด",
         "ลูกฟุตบอล"
+      ],
+      "definitions": [
+        "ร้อน ร้อน ร้อน ร้อน ร้อน",
+        "หนาว หนาว หนาว หนาว หนาว",
+        "มีความสุข มีความสุข มีความสุข มีความสุข มีความสุข",
+        "ไต๋ ไต๋ ไต๋ ไต๋ ไต๋",
+        "ลุง ลุง ลุง ลุง ลุง",
+        "ป้า ป้า ป้า ป้า ป้า",
+        "ภายนอก ภายนอก ภายนอก ภายนอก ภายนอก",
+        "ภายใน ภายใน ภายใน ภายใน ภายใน",
+        "ของขวัญ ของขวัญ ของขวัญ ของขวัญ ของขวัญ",
+        "ฉีด ฉีด ฉีด ฉีด ฉีด",
+        "เปียก เปียก เปียก เปียก เปียก",
+        "กลางคืน กลางคืน กลางคืน กลางคืน กลางคืน",
+        "การพูดคุย การพูดคุย การพูดคุย การพูดคุย การพูดคุย",
+        "เปิด เปิด เปิด เปิด เปิด",
+        "ปืนฉีดน้ำ ปืนฉีดน้ำ ปืนฉีดน้ำ ปืนฉีดน้ำ ปืนฉีดน้ำ",
+        "น้ำ น้ำ น้ำ น้ำ น้ำ",
+        "ต่อสู้น้ำ ต่อสู้น้ำ ต่อสู้น้ำ ต่อสู้น้ำ ต่อสู้น้ำ",
+        "หนังสือ หนังสือ หนังสือ หนังสือ หนังสือ",
+        "เค้กวันเกิด เค้กวันเกิด เค้กวันเกิด เค้กวันเกิด เค้กวันเกิด",
+        "ลูกฟุตบอล ลูกฟุตบอล ลูกฟุตบอล ลูกฟุตบอล ลูกฟุตบอล"
       ]
     }
   ]

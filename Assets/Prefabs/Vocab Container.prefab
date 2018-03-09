@@ -75,6 +75,8 @@ GameObject:
   - component: {fileID: 224889373046479436}
   - component: {fileID: 23333687261838494}
   - component: {fileID: 102461730120838818}
+  - component: {fileID: 61560412208956346}
+  - component: {fileID: 114304115399820300}
   m_Layer: 0
   m_Name: Definition Thai
   m_TagString: Untagged
@@ -108,6 +110,8 @@ GameObject:
   - component: {fileID: 224678763080261272}
   - component: {fileID: 23836960035385896}
   - component: {fileID: 102610972009632384}
+  - component: {fileID: 61154772143564642}
+  - component: {fileID: 114033796277184456}
   m_Layer: 0
   m_Name: Definition English
   m_TagString: Untagged
@@ -251,6 +255,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!61 &61154772143564642
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987326689937434}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -2.7929688}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 68, y: 5.5859375}
+  m_EdgeRadius: 0
 --- !u!61 &61410867168977628
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -300,6 +329,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 2.5, y: 1.7875}
+  m_EdgeRadius: 0
+--- !u!61 &61560412208956346
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1632227078235200}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -2.7929688}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 61.4, y: 5.5859375}
   m_EdgeRadius: 0
 --- !u!102 &102403071966650312
 TextMesh:
@@ -385,6 +439,19 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
+--- !u!114 &114033796277184456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1987326689937434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a4b1cfa5a76a5409b87e47f2517cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 0}
+  word: 
 --- !u!114 &114295051092716596
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -396,11 +463,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d3fba6abbe629247828fd6350216e9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roundNumber: 1
+  currentRound: 1
   englishWords: []
   thaiWords: []
   englishAudioClips: []
   thaiAudioClips: []
+--- !u!114 &114304115399820300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1632227078235200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1a4b1cfa5a76a5409b87e47f2517cf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio: {fileID: 0}
+  word: 
 --- !u!114 &114325120347865710
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,8 +492,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a4b1cfa5a76a5409b87e47f2517cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 8300000, guid: 9a55cf5764e5f1f4d970e7763bf32eeb, type: 3}
-  word: "\u0E23\u0E49\u0E2D\u0E19"
+  audio: {fileID: 0}
+  word: 
 --- !u!114 &114918265777447334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -425,8 +505,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a4b1cfa5a76a5409b87e47f2517cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 8300000, guid: ea74d562c902a8144a1d41be66d0e62d, type: 3}
-  word: hot
+  audio: {fileID: 0}
+  word: 
 --- !u!212 &212719516093810768
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -461,7 +541,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6443502ae819689488e747fee005f81e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f50e1f780bac4d849943ea52d5c72d9f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -538,7 +618,7 @@ RectTransform:
   m_GameObject: {fileID: 1987326689937434}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 1}
   m_Children: []
   m_Father: {fileID: 224609658147284802}
   m_RootOrder: 3
@@ -574,7 +654,7 @@ RectTransform:
   m_GameObject: {fileID: 1632227078235200}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalScale: {x: 0.08, y: 0.08, z: 1}
   m_Children: []
   m_Father: {fileID: 224609658147284802}
   m_RootOrder: 4
