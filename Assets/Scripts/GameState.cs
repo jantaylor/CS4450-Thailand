@@ -16,6 +16,22 @@ public class GameState : MonoBehaviour {
     [SerializeField]
     private int activeScene;
 
+    /// <summary>
+    /// Round difficulty 1 - easy, 4 - hard
+    /// </summary>
+    [SerializeField]
+    private int activeRound;
+
+    /// <summary>
+    /// Activity currently active, 1 - vocab, 2 - story, 3 - game
+    /// </summary>
+    [SerializeField]
+    private int activeActivity;
+
+    /// <summary>
+    /// List of Round Names hard coded
+    /// </summary>
+    [SerializeField]
     private string[] scenes = new string[] {
         "Round 1 Story 1",
         "Round 1 Story 2",
@@ -24,7 +40,15 @@ public class GameState : MonoBehaviour {
         "Round 1 Story 5",
         "Round 1 Story 6",
         "Round 1 Story 7",
-        "Round 1 Story 8"
+        "Round 1 Story 8",
+        "Round 2 Story 1",
+        "Round 2 Story 2",
+        "Round 2 Story 3",
+        "Round 2 Story 4",
+        "Round 2 Story 5",
+        "Round 2 Story 6",
+        "Round 2 Story 7",
+        "Round 2 Story 8"
     };
 
     /// <summary>
@@ -36,7 +60,25 @@ public class GameState : MonoBehaviour {
     }
 
     /// <summary>
-    /// On starting the game
+    /// Get round and return it
+    /// </summary>
+    /// <returns>int 1-4</returns>
+    public int ActiveRound {
+        get { return activeRound; }
+        set { activeRound = value; }
+    }
+
+    /// <summary>
+    /// Get Activity and return it
+    /// </summary>
+    /// <returns>int 1-3</returns>
+    public int ActiveActivity {
+        get { return activeActivity; }
+        set { activeActivity = value; }
+    }
+
+    /// <summary>
+    /// On starting the game, singleton state created
     /// </summary>
     void Awake() {
         if (Instance == null) {
@@ -47,26 +89,82 @@ public class GameState : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
+    /// <summary>
+    /// Set the active state to have an activeScene of 0
+    /// Set the active round to be 0 meaning menu, not started
+    /// </summary>
     void Start () {
-        activeScene = 0;
+        activeActivity = -1; // -1 is menu, 1 - vocab
+        activeRound = 1; // -1 is menu, 1 is round 1
+        activeScene = -1; // -1 is menu, 0 is round 1 story 1
 	}
 
     /// <summary>
-    /// As it says, load previous Scene
+    /// Load previous Scene
     /// </summary>
     public void LoadPreviousScene() {
         // Load the Scene
-        if (ActiveScene != 0)
+        if (ActiveScene != 0 && ActiveScene != 8 && ActiveScene != 16 && ActiveScene != 24) {
             SceneManager.LoadScene(scenes[ActiveScene -= 1]);
+        } else {
+            LoadMenu();
+        }
     }
 
     /// <summary>
-    /// As it says, load next Scene
+    /// Load next Scene
     /// </summary>
     public void LoadNextScene() {
-        // Load the Scene
-        if (ActiveScene != scenes.Length - 1)
+        // Load the Scene based on last scene
+        if (ActiveScene != 7 && ActiveScene != 15 && ActiveScene != 23 && ActiveScene != 31) {
             SceneManager.LoadScene(scenes[ActiveScene += 1]);
+        } else {
+            LoadMenu();
+        }
+    }
+
+    /// <summary>
+    /// Load the menu
+    /// </summary>
+    public void LoadMenu() {
+        // Load the menu
+        ActiveScene = -1; // menu scene
+        ActiveRound = -1; // menu round
+        SceneManager.LoadScene("Menu");
+    }
+
+    /// <summary>
+    /// Load scene based on the activity and round
+    /// </summary>
+    /// <param name="activity">int 1-3</param>
+    /// <param name="round">int 1-4</param>
+    public void LoadScene(int activity, int round) {
+        // Activity: -1 - menu, 1 - vocab, 2 - story, 3 - game
+        // Round: -1 - menu, 1 - easy, 2 - secondary
+        if (activity == 1) {
+
+        } else if (activity == 2) {
+            if (round == 1) {
+                ActiveActivity = 2;
+                ActiveRound = 1;
+                ActiveScene = 0;
+                SceneManager.LoadScene(ActiveScene);
+            } else if (round == 2) {
+                ActiveActivity = 2;
+                ActiveRound = 2;
+                ActiveScene = 8;
+                SceneManager.LoadScene(ActiveScene);
+            } else if (round == 3) {
+
+            } else if (round == 4) {
+
+            } else {
+                Debug.Log("Something went wrong. Not passing proper round.");
+            }
+        } else if (activity == 3) {
+
+        } else {
+            Debug.Log("Something went wrong. Not passing proper activity.");
+        }
     }
 }
