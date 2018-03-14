@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: d5ed78925231cf049bfbd05e128483f0
+  - enabled: 1
     path: Assets/Scenes/Round 1 Story 1.unity
     guid: f51d5078b3249d94bb0428bbe96541a2
   - enabled: 1
@@ -29,6 +32,30 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Round 1 Story 8.unity
     guid: f558b5db8e6fc0345b298170d31dd632
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Story 1.unity
+    guid: ee50d8f64ef9b7c41863e863662f88bb
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Story 2.unity
+    guid: 1e7ce96fe8199b046880438b1e6c0735
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Story 3.unity
+    guid: 9c325854aedeb5048a8f3881d37fa712
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Story 4.unity
+    guid: fc36a4af997ff424283116ba471de2d0
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Story 5.unity
+    guid: a182ec449c2348e4abc775c12477131c
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Story 6.unity
+    guid: 2594ebebe3ec07f4e81856f668c64d7b
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Story 7.unity
+    guid: d53d5321bbc388249ae40fecec6c6ca9
+  - enabled: 1
+    path: Assets/Scenes/Round 2 Story 8.unity
+    guid: 5a385e07902899b43a4e44239009f219
   - enabled: 1
     path: Assets/Scenes/Round 1 Vocab.unity
     guid: 8765a68f1a2e27945b66c729cb610ee0
