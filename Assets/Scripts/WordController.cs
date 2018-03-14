@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WordController : MonoBehaviour {
 
-	public AudioClip audio;
+	public AudioClip audioClip;
 	public string word;
 
 	private AudioSource audioPlayer;
@@ -24,7 +24,7 @@ public class WordController : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Updates the word display and the sound/image resource.  
+	/// Updates the word display and the sound/image resource.
 	/// Also resizes the box collider so it is always the same size as the displayed word.
 	/// </summary>
 	public void UpdateWord(string word, string audioPath)
@@ -36,7 +36,7 @@ public class WordController : MonoBehaviour {
 		var bounds = textMesh.GetComponent<Renderer>().bounds;
 		box.size = bounds.size / transform.localScale.x;
 
-		audio = Resources.Load<AudioClip>(audioPath);
+		audioClip = Resources.Load<AudioClip>(audioPath);
 	}
 
 	/// <summary>
@@ -48,6 +48,6 @@ public class WordController : MonoBehaviour {
 		{
 			audioPlayer.Stop();
 		}
-		audioPlayer.PlayOneShot(audio);
+		audioPlayer.PlayOneShot(audioClip);
 	}
 }
