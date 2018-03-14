@@ -86,7 +86,7 @@ public class GameState : MonoBehaviour {
     /// <summary>
     /// Load previous Scene
     /// </summary>
-    public void LoadPreviousScene(int round) {
+    public void LoadPreviousScene() {
         // Load the Scene
         if (ActiveScene != 0 || ActiveScene != 8 || ActiveScene != 16 || ActiveScene != 24) {
             SceneManager.LoadScene(scenes[ActiveScene -= 1]);
