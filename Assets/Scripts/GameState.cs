@@ -20,7 +20,7 @@ public class GameState : MonoBehaviour {
     /// Round difficulty 1 - easy, 4 - hard
     /// </summary>
     [SerializeField]
-    private int round;
+    private int activeRound;
 
     /// <summary>
     /// List of Round Names hard coded
@@ -34,7 +34,15 @@ public class GameState : MonoBehaviour {
         "Round 1 Story 5",
         "Round 1 Story 6",
         "Round 1 Story 7",
-        "Round 1 Story 8"
+        "Round 1 Story 8",
+        "Round 2 Story 1",
+        "Round 2 Story 2",
+        "Round 2 Story 3",
+        "Round 2 Story 4",
+        "Round 2 Story 5",
+        "Round 2 Story 6",
+        "Round 2 Story 7",
+        "Round 2 Story 8"
     };
 
     /// <summary>
@@ -49,16 +57,9 @@ public class GameState : MonoBehaviour {
     /// Get round and return it
     /// </summary>
     /// <returns>int 1-4</returns>
-    public int GetRound() {
-        return round;
-    }
-
-    /// <summary>
-    /// Set the round value
-    /// </summary>
-    /// <param name="value">int 1-4</param>
-    public void SetRound(int value) {
-        round = value;
+    public int ActiveRound {
+        get { return activeRound; }
+        set { activeRound = value; }
     }
 
     /// <summary>
@@ -73,27 +74,37 @@ public class GameState : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
+    /// <summary>
+    /// Set the active state to have an activeScene of 0
+    /// Set the active round to be 0 meaning menu, not started
+    /// </summary>
     void Start () {
         activeScene = 0;
+        activeRound = 0;
 	}
 
     /// <summary>
     /// Load previous Scene
     /// </summary>
-    public void LoadPreviousScene() {
+    public void LoadPreviousScene(int round) {
         // Load the Scene
-        if (ActiveScene != 0)
+        if (ActiveScene != 0 || ActiveScene != 8 || ActiveScene != 16 || ActiveScene != 24) {
             SceneManager.LoadScene(scenes[ActiveScene -= 1]);
+        } else {
+            LoadMenu();
+        }
     }
 
     /// <summary>
     /// Load next Scene
     /// </summary>
     public void LoadNextScene() {
-        // Load the Scene
-        if (ActiveScene != scenes.Length - 1)
+        // Load the Scene based on last scene
+        if (ActiveScene != 7 || ActiveScene != 15 || ActiveScene != 23 || ActiveScene != 31) {
             SceneManager.LoadScene(scenes[ActiveScene += 1]);
+        } else {
+            LoadMenu();
+        }
     }
 
     /// <summary>
@@ -102,5 +113,6 @@ public class GameState : MonoBehaviour {
     public void LoadMenu() {
         // Load the menu
         SceneManager.LoadScene("Menu");
+        ActiveRound = 0; // menu round
     }
 }
