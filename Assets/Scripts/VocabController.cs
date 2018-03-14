@@ -12,11 +12,11 @@ public class VocabController : MonoBehaviour {
 	public AudioClip[] englishAudioClips;
 	public AudioClip[] thaiAudioClips;
 
+	private SpriteRenderer image;
 	private WordController englishWord;
 	private WordController thaiWord;
 	private WordController englishDefinition;
 	private WordController thaiDefinition;
-	private GameObject image;
 	private int currentIndex;
 	private string vocabJsonFile;
 	private VocabResource vocabJsonObject;
@@ -118,17 +118,25 @@ public class VocabController : MonoBehaviour {
 
 
 	void Start () {
-		// Initialize at the index
+		// Initialize the index and the children element references
 		currentIndex = 0;
 		englishWord = GetComponentsInChildren<WordController>()[0];
 		thaiWord = GetComponentsInChildren<WordController>()[1];
 		englishDefinition = GetComponentsInChildren<WordController>()[2];
 		thaiDefinition = GetComponentsInChildren<WordController>()[3];
+		image = GameObject.Find("Vocab Image").GetComponent<SpriteRenderer>();
+
+
+		// Load and randomize the vocab, then start at the first.
 		LoadJson();
 		GenerateRandomOrder();
 		Proceed(0);
 	}
 
+	/// <summary>
+	/// Creates an array of the index numbers of the vocab list in a random order
+	/// </summary>
+	/// <returns></returns>
 	void GenerateRandomOrder()
 	{
 		int length = vocabJsonObject.vocab[0].words.Length;
@@ -147,32 +155,47 @@ public class VocabController : MonoBehaviour {
 		}
 	}
 
-	// Update is called once per frame
-	void Update () {
-
-	}
-
+	/// <summary>
+	/// Loads a JSON file and parses it into a VocabResource object
+	/// </summary>
 	public void LoadJson()
 	{
 		vocabJsonFile = Resources.Load<TextAsset>("Round" + currentRound + "Vocab").text;
 		vocabJsonObject = JsonUtility.FromJson<VocabResource>(vocabJsonFile);
 	}
 
+	/// <summary>
+	/// Updates the UI with the information from the previous (i=-1), current (i=0), or next(i=1) vocab word
+	/// </summary>
+	/// <returns>Whether there the previous/next vocab word exists.</returns>
 	public bool Proceed (int i)
 	{
-		Debug.Log("Proceed " + i + ": " + (currentIndex + i));
+		bool thaiHelp = !(currentRound > 1);
 		if (currentIndex + i > -1 && currentIndex + i < randomOrder.Length)
 		{
+			// advance the vocab index
 			currentIndex += i;
-			Debug.Log("Index: " + currentIndex + "(" + randomOrder[currentIndex] + ") + " + i);
+
+			// Get the paths to the resources
 			var audioPaths = vocabJsonObject.GetAudioPaths(randomOrder[currentIndex]);
 			var definitionPaths = vocabJsonObject.GetDefinitionPaths(randomOrder[currentIndex]);
 			var imagePaths = vocabJsonObject.GetImagePaths(randomOrder[currentIndex]);
 
-			englishWord.UpdateWord(vocabJsonObject.vocab[0].words[randomOrder[currentIndex]], audioPaths[0], imagePaths[0]);
-			thaiWord.UpdateWord(vocabJsonObject.vocab[1].words[randomOrder[currentIndex]], audioPaths[1], imagePaths[1]);
-			englishDefinition.UpdateWord(vocabJsonObject.vocab[0].definitions[randomOrder[currentIndex]], definitionPaths[0], imagePaths[0]);
-			thaiDefinition.UpdateWord(vocabJsonObject.vocab[1].definitions[randomOrder[currentIndex]], definitionPaths[1], imagePaths[1]);
+			// Update the UI
+			image.sprite = Resources.Load<Sprite>(imagePaths[0]);
+			englishWord.UpdateWord(vocabJsonObject.vocab[0].words[randomOrder[currentIndex]], audioPaths[0]);
+			englishDefinition.UpdateWord(vocabJsonObject.vocab[0].definitions[randomOrder[currentIndex]], definitionPaths[0]);
+
+			if (thaiHelp)
+			{
+				thaiWord.UpdateWord(vocabJsonObject.vocab[1].words[randomOrder[currentIndex]], audioPaths[1]);
+				thaiDefinition.UpdateWord(vocabJsonObject.vocab[1].definitions[randomOrder[currentIndex]], definitionPaths[1]);
+			}
+			else
+			{
+				thaiWord.UpdateWord("","");
+				thaiDefinition.UpdateWord("","");
+			}
 
 			return true;
 		}

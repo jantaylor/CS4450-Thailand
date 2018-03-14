@@ -7,15 +7,13 @@ public class WordController : MonoBehaviour {
 	public AudioClip audio;
 	public string word;
 
-	private SpriteRenderer image;
-	private GameObject audioPlayer;
+	private AudioSource audioPlayer;
 	private TextMesh textMesh;
 	private BoxCollider2D box;
 
 	// Use this for initialization
 	void Start () {
-		image = GameObject.Find("Vocab Image").GetComponent<SpriteRenderer>();
-		audioPlayer = GameObject.Find("Audio Player");
+		audioPlayer = GameObject.Find("Audio Player").GetComponent<AudioSource>();
 		textMesh = GetComponent<TextMesh>();
 		box = GetComponent<BoxCollider2D>();
 	}
@@ -25,7 +23,11 @@ public class WordController : MonoBehaviour {
 
 	}
 
-	public void UpdateWord(string word, string audioPath, string imagePath)
+	/// <summary>
+	/// Updates the word display and the sound/image resource.  
+	/// Also resizes the box collider so it is always the same size as the displayed word.
+	/// </summary>
+	public void UpdateWord(string word, string audioPath)
 	{
 		this.word = word;
 		textMesh.text = word;
@@ -35,11 +37,17 @@ public class WordController : MonoBehaviour {
 		box.size = bounds.size / transform.localScale.x;
 
 		audio = Resources.Load<AudioClip>(audioPath);
-		image.sprite = Resources.Load<Sprite>(imagePath);
 	}
 
+	/// <summary>
+	/// Plays the sound of the word clicked/tapped.
+	/// </summary>
 	void OnMouseUp()
 	{
-		audioPlayer.GetComponent<AudioSource>().PlayOneShot(audio);
+		if (audioPlayer.isPlaying)
+		{
+			audioPlayer.Stop();
+		}
+		audioPlayer.PlayOneShot(audio);
 	}
 }
