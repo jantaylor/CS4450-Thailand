@@ -19,6 +19,15 @@ public class MenuController : MonoBehaviour {
 	}
 
     /// <summary>
+    /// Load scene based on the activity and round
+    /// </summary>
+    /// <param name="activity">int 0-3</param>
+    /// <param name="round">int 1-4</param>
+    public void LoadScene(int activity, int round) {
+        GameState.Instance.LoadScene(activity, round);
+    }
+
+    /// <summary>
     /// Load the Menu
     /// </summary>
     public void LoadMenu() {
