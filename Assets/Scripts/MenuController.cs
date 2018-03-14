@@ -17,6 +17,11 @@ public class MenuController : MonoBehaviour {
     public void LoadNextScene() {
         GameState.Instance.LoadNextScene();		
 	}
-	
 
+    /// <summary>
+    /// Load the Menu
+    /// </summary>
+    public void LoadMenu() {
+        GameState.Instance.LoadMenu();
+    }
 }
