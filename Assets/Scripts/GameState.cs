@@ -63,7 +63,7 @@ public class GameState : MonoBehaviour {
     }
 
     /// <summary>
-    /// On starting the game
+    /// On starting the game, singleton state created
     /// </summary>
     void Awake() {
         if (Instance == null) {
@@ -79,8 +79,8 @@ public class GameState : MonoBehaviour {
     /// Set the active round to be 0 meaning menu, not started
     /// </summary>
     void Start () {
-        activeScene = 0;
-        activeRound = 0;
+        activeScene = 0; // -1 is menu, 0 is round 1 story 1
+        activeRound = 1; // -1 is menu, 1 is round 1
 	}
 
     /// <summary>
@@ -88,7 +88,7 @@ public class GameState : MonoBehaviour {
     /// </summary>
     public void LoadPreviousScene() {
         // Load the Scene
-        if (ActiveScene != 0 || ActiveScene != 8 || ActiveScene != 16 || ActiveScene != 24) {
+        if (ActiveScene != 0 && ActiveScene != 8 && ActiveScene != 16 && ActiveScene != 24) {
             SceneManager.LoadScene(scenes[ActiveScene -= 1]);
         } else {
             LoadMenu();
@@ -100,7 +100,7 @@ public class GameState : MonoBehaviour {
     /// </summary>
     public void LoadNextScene() {
         // Load the Scene based on last scene
-        if (ActiveScene != 7 || ActiveScene != 15 || ActiveScene != 23 || ActiveScene != 31) {
+        if (ActiveScene != 7 && ActiveScene != 15 && ActiveScene != 23 && ActiveScene != 31) {
             SceneManager.LoadScene(scenes[ActiveScene += 1]);
         } else {
             LoadMenu();
@@ -112,7 +112,8 @@ public class GameState : MonoBehaviour {
     /// </summary>
     public void LoadMenu() {
         // Load the menu
+        ActiveScene = -1; // menu scene
+        ActiveRound = -1; // menu round
         SceneManager.LoadScene("Menu");
-        ActiveRound = 0; // menu round
     }
 }
