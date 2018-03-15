@@ -120,6 +120,7 @@ public class VocabController : MonoBehaviour {
 	void Start () {
 		// Initialize the index and the children element references
 		currentIndex = 0;
+		currentRound = GameState.Instance.ActiveRound;
 		englishWord = GetComponentsInChildren<WordController>()[0];
 		thaiWord = GetComponentsInChildren<WordController>()[1];
 		englishDefinition = GetComponentsInChildren<WordController>()[2];
@@ -167,8 +168,7 @@ public class VocabController : MonoBehaviour {
 	/// <summary>
 	/// Updates the UI with the information from the previous (i=-1), current (i=0), or next(i=1) vocab word
 	/// </summary>
-	/// <returns>Whether there the previous/next vocab word exists.</returns>
-	public bool Proceed (int i)
+	public void Proceed (int i)
 	{
 		bool thaiHelp = !(currentRound > 1);
 		if (currentIndex + i > -1 && currentIndex + i < randomOrder.Length)
@@ -197,8 +197,11 @@ public class VocabController : MonoBehaviour {
 				thaiDefinition.UpdateWord("","");
 			}
 
-			return true;
 		}
-		return false;
+		else
+		{
+			GameState.Instance.LoadMenu();
+		}
+
 	}
 }
