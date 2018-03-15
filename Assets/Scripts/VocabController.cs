@@ -170,7 +170,8 @@ public class VocabController : MonoBehaviour {
 	/// </summary>
 	public void Proceed (int i)
 	{
-		bool thaiHelp = !(currentRound > 1);
+		bool thaiHelp = !(currentRound > 2);
+		bool english = (currentRound > 1);
 		if (currentIndex + i > -1 && currentIndex + i < randomOrder.Length)
 		{
 			// advance the vocab index
@@ -183,8 +184,16 @@ public class VocabController : MonoBehaviour {
 
 			// Update the UI
 			image.sprite = Resources.Load<Sprite>(imagePaths[0]);
-			englishWord.UpdateWord(vocabJsonObject.vocab[0].words[randomOrder[currentIndex]], audioPaths[0]);
-			englishDefinition.UpdateWord(vocabJsonObject.vocab[0].definitions[randomOrder[currentIndex]], definitionPaths[0]);
+			if (english)
+			{
+				englishWord.UpdateWord(vocabJsonObject.vocab[0].words[randomOrder[currentIndex]], audioPaths[0]);
+				englishDefinition.UpdateWord(vocabJsonObject.vocab[0].definitions[randomOrder[currentIndex]], definitionPaths[0]);
+			}
+			else
+			{
+				englishWord.UpdateWord("","");
+				englishDefinition.UpdateWord("","");
+			}
 
 			if (thaiHelp)
 			{
