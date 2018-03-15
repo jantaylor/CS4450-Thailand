@@ -468,8 +468,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 253.9, y: -10}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 276, y: -17}
+  m_SizeDelta: {x: 171.6, y: 149.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432806325
 MonoBehaviour:
@@ -728,6 +728,7 @@ GameObject:
   - component: {fileID: 1057824349}
   - component: {fileID: 1057824351}
   - component: {fileID: 1057824350}
+  - component: {fileID: 1057824352}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -786,6 +787,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1057824348}
+--- !u!114 &1057824352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057824348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 287829570}
+          m_MethodName: LoadMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1067222476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,7 +1681,7 @@ MonoBehaviour:
   word: {fileID: 8300000, guid: dd42da238fb505b41a161b1b8f777a58, type: 3}
   word2: {fileID: 8300000, guid: dd42da238fb505b41a161b1b8f777a58, type: 3}
   word3: {fileID: 0}
-  sentence: {fileID: 8300000, guid: 5cad1b5b5f07eea45969b3a670e1e857, type: 3}
+  sentence: {fileID: 8300000, guid: 3517e2bd10011db4c9962fbe6217f532, type: 3}
 --- !u!4 &1947459148
 Transform:
   m_ObjectHideFlags: 0
