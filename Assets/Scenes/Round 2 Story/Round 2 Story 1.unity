@@ -496,7 +496,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 5, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569251217
@@ -531,7 +531,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: __
+  m_Text: ___
 --- !u!222 &569251218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -687,6 +687,7 @@ GameObject:
   - component: {fileID: 1057824349}
   - component: {fileID: 1057824351}
   - component: {fileID: 1057824350}
+  - component: {fileID: 1057824352}
   m_Layer: 5
   m_Name: Options
   m_TagString: Untagged
@@ -745,6 +746,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1057824348}
+--- !u!114 &1057824352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1057824348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1841858845}
+          m_MethodName: LoadMenu
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &1067222476
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,7 +957,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -112.6, y: -35}
+  m_AnchoredPosition: {x: -115, y: -35}
   m_SizeDelta: {x: 54.88, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1198547029
@@ -1457,7 +1488,7 @@ MonoBehaviour:
   word: {fileID: 8300000, guid: 9a55cf5764e5f1f4d970e7763bf32eeb, type: 3}
   word2: {fileID: 8300000, guid: 6d82bea453365534390f6d98c9352686, type: 3}
   word3: {fileID: 0}
-  sentence: {fileID: 8300000, guid: e50e672f4b9e7dd478015deb108ff9e8, type: 3}
+  sentence: {fileID: 8300000, guid: f042ff5d4103fd74197abc0bbe2cec4d, type: 3}
 --- !u!4 &1947459148
 Transform:
   m_ObjectHideFlags: 0
