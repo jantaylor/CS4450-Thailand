@@ -571,7 +571,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: ____
+  m_Text: ______
 --- !u!222 &569251218
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -927,8 +927,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u201CWhat is it, Uncle?\u201D Kiet asked. \u201COpen it and see,\u201D
-    said Uncle."
+  m_Text: "\"\u0E14\u0E39 Kiet \u0E19\u0E35\u0E48\u0E04\u0E37\u0E2D\u0E02\u0E2D\u0E07\u0E02\u0E27\u0E31\u0E0D
+    \u0E19\u0E35\u0E48\u0E2A\u0E33\u0E2B\u0E23\u0E31\u0E1A\u0E40\u0E18\u0E2D.\""
 --- !u!222 &1163439276
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -952,7 +952,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1198547028
 RectTransform:
   m_ObjectHideFlags: 0
@@ -969,7 +969,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 81.7, y: 15}
+  m_AnchoredPosition: {x: 37.5, y: 15}
   m_SizeDelta: {x: 75, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1198547029
@@ -1648,10 +1648,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1473571369}
-  word: {fileID: 8300000, guid: c459690b54c831845acfd1ade629c61a, type: 3}
-  word2: {fileID: 0}
-  word3: {fileID: 0}
-  sentence: {fileID: 8300000, guid: f8f409d8954fa1943aba46c3e3a8b9f6, type: 3}
+  word: {fileID: 8300000, guid: 45a45571e5094334ebaad891d536235f, type: 3}
+  word2: {fileID: 8300000, guid: d9fcbd157100b234682ae447f10ffa60, type: 3}
+  word3: {fileID: 8300000, guid: 04c30e98191e45e42836d9bb801b8472, type: 3}
+  sentence: {fileID: 8300000, guid: 539e11bfef49dc74b89eb39dd6d716cd, type: 3}
 --- !u!4 &1947459148
 Transform:
   m_ObjectHideFlags: 0

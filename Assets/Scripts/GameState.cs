@@ -95,7 +95,7 @@ public class GameState : MonoBehaviour {
     /// </summary>
     void Start () {
         activeActivity = -1; // -1 is menu, 1 - vocab
-        activeRound = 1; // -1 is menu, 1 is round 1
+        activeRound = -1; // -1 is menu, 1 is round 1
         activeScene = -1; // -1 is menu, 0 is round 1 story 1
 	}
 
@@ -146,27 +146,32 @@ public class GameState : MonoBehaviour {
             ActiveRound = round;
             SceneManager.LoadScene("Round " + round + " Vocab");
         } else if (activity == 2) {
-            if (round == 1) {
-                ActiveActivity = 2;
-                ActiveRound = 1;
-                ActiveScene = 0;
-                SceneManager.LoadScene(scenes[ActiveScene]);
-            } else if (round == 2) {
-                ActiveActivity = 2;
-                ActiveRound = 2;
-                ActiveScene = 8;
-                SceneManager.LoadScene(scenes[ActiveScene]);
-            } else if (round == 3) {
-
-            } else if (round == 4) {
-
-            } else {
-                Debug.Log("Something went wrong. Not passing proper round.");
+            ActiveActivity = activity;
+            ActiveRound = round;
+            switch (round) {
+                case 1:
+                    ActiveScene = 0;
+                    break;
+                case 2:
+                    ActiveScene = 8;
+                    break;
+                case 3:
+                    ActiveScene = 16;
+                    break;
+                case 4:
+                    ActiveScene = 24;
+                    break;
+                default:
+                    ActiveScene = -1;
+                    Debug.Log("Something went wrong. Not passing correct Active Scene/round.");
+                    break;
             }
+            SceneManager.LoadScene("Round " + round + " Story 1");
         } else if (activity == 3) {
-
+            // TODO
         } else {
             Debug.Log("Something went wrong. Not passing proper activity.");
+            LoadMenu();
         }
     }
 }
