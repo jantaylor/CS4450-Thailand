@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114304335891021238}
   - component: {fileID: 114074487389684486}
   m_Layer: 0
-  m_Name: Round 1 Learn
+  m_Name: Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
