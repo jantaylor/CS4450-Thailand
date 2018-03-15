@@ -95,7 +95,7 @@ public class GameState : MonoBehaviour {
     /// </summary>
     void Start () {
         activeActivity = -1; // -1 is menu, 1 - vocab
-        activeRound = -1; // -1 is menu, 1 is round 1
+        activeRound = 1; // -1 is menu, 1 is round 1
         activeScene = -1; // -1 is menu, 0 is round 1 story 1
 	}
 
@@ -130,7 +130,6 @@ public class GameState : MonoBehaviour {
         // Load the menu
         ActiveScene = -1; // menu scene
         ActiveRound = -1; // menu round
-        ActiveActivity = -1; // menu activity
         SceneManager.LoadScene("Menu");
     }
 
@@ -143,18 +142,20 @@ public class GameState : MonoBehaviour {
         // Activity: -1 - menu, 1 - vocab, 2 - story, 3 - game
         // Round: -1 - menu, 1 - easy, 2 - secondary
         if (activity == 1) {
-
+            ActiveActivity = activity;
+            ActiveRound = round;
+            SceneManager.LoadScene("Round " + round + " Vocab");
         } else if (activity == 2) {
-            ActiveActivity = 2;
-
             if (round == 1) {
+                ActiveActivity = 2;
                 ActiveRound = 1;
                 ActiveScene = 0;
-                SceneManager.LoadScene(ActiveScene);
-            } else if (round == 2) {              
+                SceneManager.LoadScene(scenes[ActiveScene]);
+            } else if (round == 2) {
+                ActiveActivity = 2;
                 ActiveRound = 2;
                 ActiveScene = 8;
-                SceneManager.LoadScene(ActiveScene);
+                SceneManager.LoadScene(scenes[ActiveScene]);
             } else if (round == 3) {
 
             } else if (round == 4) {
