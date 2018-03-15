@@ -120,6 +120,7 @@ public class VocabController : MonoBehaviour {
 	void Start () {
 		// Initialize the index and the children element references
 		currentIndex = 0;
+		currentRound = GameState.Instance.ActiveRound;
 		englishWord = GetComponentsInChildren<WordController>()[0];
 		thaiWord = GetComponentsInChildren<WordController>()[1];
 		englishDefinition = GetComponentsInChildren<WordController>()[2];
