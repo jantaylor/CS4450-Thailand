@@ -130,7 +130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &182613660
 RectTransform:
   m_ObjectHideFlags: 0
@@ -927,7 +927,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Kiet has a secret. Last night his uncle came to visit.
+  m_Text: "Kiet \u0E21\u0E35\u0E04\u0E27\u0E32\u0E21\u0E25\u0E31\u0E1A \u0E40\u0E21\u0E37\u0E48\u0E2D\u0E04\u0E37\u0E19\u0E17\u0E35\u0E48\u0E25\u0E38\u0E07\u0E02\u0E2D\u0E07\u0E40\u0E02\u0E32\u0E21\u0E32\u0E40\u0E22\u0E35\u0E48\u0E22\u0E21"
 --- !u!222 &1163439276
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -951,7 +951,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1198547028
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1341,7 +1341,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1781256220
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1650,7 +1650,7 @@ MonoBehaviour:
   word: {fileID: 8300000, guid: f33224a2c7cecce4ba8077f7d7a86ae7, type: 3}
   word2: {fileID: 8300000, guid: 993fe017e1f7bf047ac3deba2cfde878, type: 3}
   word3: {fileID: 8300000, guid: 04c30e98191e45e42836d9bb801b8472, type: 3}
-  sentence: {fileID: 8300000, guid: e50e672f4b9e7dd478015deb108ff9e8, type: 3}
+  sentence: {fileID: 8300000, guid: 16326557c92d70448a3f3629da93fac0, type: 3}
 --- !u!4 &1947459148
 Transform:
   m_ObjectHideFlags: 0
