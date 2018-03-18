@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: d5ed78925231cf049bfbd05e128483f0
   - enabled: 1
-    path: Assets/Scenes/Round 1 Vocab.unity
+    path: Assets/Scenes/Vocab.unity
     guid: 8765a68f1a2e27945b66c729cb610ee0
   - enabled: 1
     path: Assets/Scenes/Round 2 Vocab.unity
