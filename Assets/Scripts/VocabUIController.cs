@@ -39,4 +39,9 @@ public class VocabUIController : MonoBehaviour {
 	{
 		vocabController.Proceed(1);
 	}
+
+	public void Menu()
+	{
+		GameState.Instance.LoadMenu();
+	}
 }

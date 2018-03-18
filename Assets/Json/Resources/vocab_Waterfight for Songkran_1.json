@@ -1,7 +1,7 @@
 {
   "languages": ["engl_uk", "thai"],
   "audioRoot": "Sounds",
-  "audioFile": "{LANG}_{WORD}",
+  "audioFile": "Vocab/{LANG}_{WORD}",
   "definitionAudioFile": "Definitions/{LANG}_{WORD}",
   "imageFile": "vocab_{WORD}",
   "vocab": [

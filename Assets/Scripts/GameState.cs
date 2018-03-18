@@ -11,6 +11,12 @@ public class GameState : MonoBehaviour {
     public static GameState Instance;
 
     /// <summary>
+    /// Language name
+    /// </summary>
+    [SerializeField]
+    private string activeLanguage;
+
+    /// <summary>
     /// Scene name
     /// </summary>
     [SerializeField]
@@ -27,6 +33,18 @@ public class GameState : MonoBehaviour {
     /// </summary>
     [SerializeField]
     private int activeActivity;
+
+    /// <summary>
+    /// Story currently active
+    /// </summary>
+    [SerializeField]
+    private string activeStory;
+
+    /// <summary>
+    /// Difficulty currently active, 1 - beginner, 2 - intermediate, 3 - advanced
+    /// </summary>
+    [SerializeField]
+    private int activeDifficulty;
 
     /// <summary>
     /// List of Round Names hard coded
@@ -50,6 +68,15 @@ public class GameState : MonoBehaviour {
         "Round 2 Story 7",
         "Round 2 Story 8"
     };
+
+    /// <summary>
+    /// Get Language and return it
+    /// </summary>
+    /// <returns>Name of the Language (Scalable to include other languages)</returns>
+    public string ActiveLanguage {
+        get { return activeLanguage; }
+        set { activeLanguage = value; }
+    }
 
     /// <summary>
     /// Set and get active scene
@@ -78,6 +105,24 @@ public class GameState : MonoBehaviour {
     }
 
     /// <summary>
+    /// Get Story and return it
+    /// </summary>
+    /// <returns>Name of the Story (Scalable to include other stories)</returns>
+    public string ActiveStory {
+        get { return activeStory; }
+        set { activeStory = value; }
+    }
+
+    /// <summary>
+    /// Get Difficulty and return it
+    /// </summary>
+    /// <returns>int 1-3</returns>
+    public int ActiveDifficulty {
+        get { return activeDifficulty; }
+        set { activeDifficulty = value; }
+    }
+
+    /// <summary>
     /// On starting the game, singleton state created
     /// </summary>
     void Awake() {
@@ -94,9 +139,12 @@ public class GameState : MonoBehaviour {
     /// Set the active round to be 0 meaning menu, not started
     /// </summary>
     void Start () {
+        activeLanguage = "thai"; // TODO: Make this not hard-coded
         activeActivity = -1; // -1 is menu, 1 - vocab
         activeRound = -1; // -1 is menu, 1 is round 1
         activeScene = -1; // -1 is menu, 0 is round 1 story 1
+        activeStory = "Waterfight for Songkran"; // TODO: Make this not hard-coded
+        activeDifficulty = 1; // 1 is Beginner, 2 is Intermediate, 3 is Advanced
 	}
 
     /// <summary>
@@ -144,7 +192,7 @@ public class GameState : MonoBehaviour {
         if (activity == 1) {
             ActiveActivity = activity;
             ActiveRound = round;
-            SceneManager.LoadScene("Round " + round + " Vocab");
+            SceneManager.LoadScene("Vocab");
         } else if (activity == 2) {
             ActiveActivity = activity;
             ActiveRound = round;

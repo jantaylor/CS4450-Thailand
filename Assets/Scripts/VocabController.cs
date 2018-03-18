@@ -2,25 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class VocabController : MonoBehaviour {
 
-	// TODO: currentRound will come from the game state
-	public int currentRound;
-	public string[] englishWords;
-	public string[] thaiWords;
-	public AudioClip[] englishAudioClips;
-	public AudioClip[] thaiAudioClips;
+	/// <summary>
+	/// activeRound is used to determine the availability of foreign language help - from GameState
+	/// </summary>
+	public int activeRound;
+
+	/// <summary>
+	/// activeLanguage is used to determine which language to pull from vocab - from GameState
+	/// </summary>
+	public string activeLanguage;
+
+	/// <summary>
+	/// activeDifficulty is used to determine which vocab list to use - from GameState
+	/// </summary>
+	public int activeDifficulty;
+
+	/// <summary>
+	/// activeStory is used to determine which vocab list to use - from GameState
+	/// </summary>
+	public string activeStory;
+
+	/// <summary>
+	/// Whether to display English text. 0: no; 1: yes
+	/// </summary>
+	public int english;
+
+	/// <summary>
+	/// Whether foreign (thai) help is available: -1: no; 0: yes; 1: yes, visible by default.
+	/// </summary>
+	public int foreignHelp;
+
+	/// <summary>
+	/// Whether speech is enabled/require: -1: no; 0: available (practice); 1: required.
+	/// </summary>
+	public int speech;
 
 	private SpriteRenderer image;
 	private WordController englishWord;
-	private WordController thaiWord;
+	private WordController foreignWord;
 	private WordController englishDefinition;
-	private WordController thaiDefinition;
-	private int currentIndex;
+	private WordController foreignDefinition;
+
 	private string vocabJsonFile;
 	private VocabResource vocabJsonObject;
 	private int[] randomOrder;
+	private int currentIndex;
+	private int languageIndex;
 
 	[System.Serializable]
 	public class VocabResource
@@ -118,18 +149,25 @@ public class VocabController : MonoBehaviour {
 
 
 	void Start () {
+		// initialize variables from the GameState for shorter referencing.
+		activeRound = GameState.Instance.ActiveRound;
+		activeStory = GameState.Instance.ActiveStory;
+		activeLanguage = GameState.Instance.ActiveLanguage;
+		activeDifficulty = GameState.Instance.ActiveDifficulty;
+
 		// Initialize the index and the children element references
 		currentIndex = 0;
-		currentRound = GameState.Instance.ActiveRound;
 		englishWord = GetComponentsInChildren<WordController>()[0];
-		thaiWord = GetComponentsInChildren<WordController>()[1];
+		foreignWord = GetComponentsInChildren<WordController>()[1];
 		englishDefinition = GetComponentsInChildren<WordController>()[2];
-		thaiDefinition = GetComponentsInChildren<WordController>()[3];
+		foreignDefinition = GetComponentsInChildren<WordController>()[3];
 		image = GameObject.Find("Vocab Image").GetComponent<SpriteRenderer>();
 
+		SetupLanguageHelp();
 
 		// Load and randomize the vocab, then start at the first.
 		LoadJson();
+		languageIndex = Array.FindIndex(vocabJsonObject.languages, language => language.Equals(activeLanguage));
 		GenerateRandomOrder();
 		Proceed(0);
 	}
@@ -161,8 +199,40 @@ public class VocabController : MonoBehaviour {
 	/// </summary>
 	public void LoadJson()
 	{
-		vocabJsonFile = Resources.Load<TextAsset>("Round" + currentRound + "Vocab").text;
+		vocabJsonFile = Resources.Load<TextAsset>("vocab_" + activeStory + "_" + activeDifficulty).text;
 		vocabJsonObject = JsonUtility.FromJson<VocabResource>(vocabJsonFile);
+	}
+
+	/// <summary>
+	/// Sets the settings for the help based on activeRound.
+	/// </summary>
+	public void SetupLanguageHelp()
+	{
+		speech = -1;
+
+		if (activeRound == 1)
+		{
+			foreignHelp = 1;
+			english = -1;
+		}
+		else
+		{
+			english = 1;
+
+			if (activeRound == 2)
+			{
+				foreignHelp = 1;
+			}
+			else if (activeRound == 3)
+			{
+				foreignHelp = 0;
+			}
+			else
+			{
+				foreignHelp = -1;
+				speech = 1;
+			}
+		}
 	}
 
 	/// <summary>
@@ -170,8 +240,12 @@ public class VocabController : MonoBehaviour {
 	/// </summary>
 	public void Proceed (int i)
 	{
-		bool thaiHelp = !(currentRound > 2);
-		bool english = (currentRound > 1);
+		SetupLanguageHelp();
+		englishWord.gameObject.SetActive((english == 1));
+		englishDefinition.gameObject.SetActive((english == 1));
+		foreignWord.gameObject.SetActive((foreignHelp == 1));
+		foreignDefinition.gameObject.SetActive((foreignHelp == 1));
+
 		if (currentIndex + i > -1 && currentIndex + i < randomOrder.Length)
 		{
 			// advance the vocab index
@@ -184,33 +258,29 @@ public class VocabController : MonoBehaviour {
 
 			// Update the UI
 			image.sprite = Resources.Load<Sprite>(imagePaths[0]);
-			if (english)
-			{
-				englishWord.UpdateWord(vocabJsonObject.vocab[0].words[randomOrder[currentIndex]], audioPaths[0]);
-				englishDefinition.UpdateWord(vocabJsonObject.vocab[0].definitions[randomOrder[currentIndex]], definitionPaths[0]);
-			}
-			else
-			{
-				englishWord.UpdateWord("","");
-				englishDefinition.UpdateWord("","");
-			}
+			englishWord.UpdateWord(vocabJsonObject.vocab[0].words[randomOrder[currentIndex]], audioPaths[0]);
+			englishDefinition.UpdateWord(vocabJsonObject.vocab[0].definitions[randomOrder[currentIndex]], definitionPaths[0]);
 
-			if (thaiHelp)
-			{
-				thaiWord.UpdateWord(vocabJsonObject.vocab[1].words[randomOrder[currentIndex]], audioPaths[1]);
-				thaiDefinition.UpdateWord(vocabJsonObject.vocab[1].definitions[randomOrder[currentIndex]], definitionPaths[1]);
-			}
-			else
-			{
-				thaiWord.UpdateWord("","");
-				thaiDefinition.UpdateWord("","");
-			}
+			foreignWord.UpdateWord(vocabJsonObject.vocab[languageIndex].words[randomOrder[currentIndex]], audioPaths[languageIndex]);
+			foreignDefinition.UpdateWord(vocabJsonObject.vocab[languageIndex].definitions[randomOrder[currentIndex]], definitionPaths[languageIndex]);
 
 		}
 		else
 		{
 			GameState.Instance.LoadMenu();
 		}
-
 	}
+
+	///<summary>
+	/// Shows the foreign language content if it is enabled (i.e. if not in round 4)
+	///</summary>
+	public void showLanguageHelp()
+	{
+		if (foreignHelp == 0)
+		{
+			foreignWord.gameObject.SetActive(true);
+			foreignDefinition.gameObject.SetActive(true);
+		}
+	}
+
 }

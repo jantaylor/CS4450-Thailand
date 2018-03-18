@@ -7,12 +7,14 @@ public class WordController : MonoBehaviour {
 	public AudioClip audioClip;
 	public string word;
 
+	private VocabController vocabController;
 	private AudioSource audioPlayer;
 	private TextMesh textMesh;
 	private BoxCollider2D box;
 
 	// Use this for initialization
 	void Start () {
+		vocabController = GameObject.Find("Vocab Container").GetComponent<VocabController>();
 		audioPlayer = GameObject.Find("Audio Player").GetComponent<AudioSource>();
 		textMesh = GetComponent<TextMesh>();
 		box = GetComponent<BoxCollider2D>();
@@ -49,5 +51,6 @@ public class WordController : MonoBehaviour {
 			audioPlayer.Stop();
 		}
 		audioPlayer.PlayOneShot(audioClip);
+		vocabController.showLanguageHelp();
 	}
 }
