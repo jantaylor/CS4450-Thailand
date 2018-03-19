@@ -1478,6 +1478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f4a31b40165194ca4a59a175e2b133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  storyController: {fileID: 0}
 --- !u!1 &1847336537
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,6 +1586,7 @@ MonoBehaviour:
   word3: {fileID: 0}
   sentence: {fileID: 8300000, guid: f042ff5d4103fd74197abc0bbe2cec4d, type: 3}
   menuHidden: 0
+  sceneCompleted: 0
   backButton: {fileID: 1813166698}
   forwardButton: {fileID: 627671082}
   menuButton: {fileID: 1057824348}

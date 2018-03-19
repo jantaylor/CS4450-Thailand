@@ -38,7 +38,7 @@ public class StoryController : MonoBehaviour {
     /// <summary>
     /// Play sentence when loading the scene
     /// </summary>
-    public void Start() {
+    public void Awake() {
         HideMenu();
         //PlaySentence(); // Removed on request on sprint 1
     }
@@ -55,6 +55,7 @@ public class StoryController : MonoBehaviour {
         if (!menuHidden)
             return;
 
+        menuHidden = false;
         int activeScene = GameState.Instance.ActiveScene;
         // don't show the back button on first scenes of story
         if (activeScene != 0 && activeScene != 8 && activeScene != 16 && activeScene != 24) {
