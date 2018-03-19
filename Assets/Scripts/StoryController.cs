@@ -11,19 +11,9 @@ public class StoryController : MonoBehaviour {
     public AudioSource audioSource;
 
     /// <summary>
-    /// The first word that is read separately
+    /// The words that are read separately
     /// </summary>
-    public AudioClip word;
-
-    /// <summary>
-    /// The second word that is read separately
-    /// </summary>
-    public AudioClip word2;
-
-    /// <summary>
-    /// The second word that is read separately
-    /// </summary>
-    public AudioClip word3;
+    public AudioClip word, word2, word3;
 
     /// <summary>
     /// The sentence that is read
@@ -36,29 +26,9 @@ public class StoryController : MonoBehaviour {
     public bool menuHidden;
 
     /// <summary>
-    /// Game object for the back button
+    /// Game objects for UI Menu
     /// </summary>
-    public Image backButton;
-
-    /// <summary>
-    /// Game Object for the forward button
-    /// </summary>
-    public Image forwardButton;
-
-    /// <summary>
-    /// Game Object for the menu button
-    /// </summary>
-    public Image menuButton;
-
-    /// <summary>
-    /// Game object for the normal sound sentance clip
-    /// </summary>
-    public Image normalSound;
-
-    /// <summary>
-    /// Game object for the slowed down sentance clip
-    /// </summary>
-    public Image slowSound;
+    public GameObject backButton, forwardButton, menuButton, normalSound, slowSound;
 
     /// <summary>
     /// Play sentence when loading the scene
@@ -72,24 +42,31 @@ public class StoryController : MonoBehaviour {
     /// Show the menu but the back button
     /// </summary>
     public void ShowMenu() {
+        if (!menuHidden)
+            return;
+
         int activeScene = GameState.Instance.ActiveScene;
         // don't show the back button on first scenes of story
-        if (activeScene != 7 && activeScene != 15 && activeScene != 23 && activeScene != 31) {
-            backButton.enabled = true;
+        if (activeScene != 0 && activeScene != 8 && activeScene != 16 && activeScene != 24) {
+            backButton.gameObject.SetActive(true);
         }
-        forwardButton.enabled = true;
-        //normalSound.enabled = true;
-        //slowSound.enabled = true;
+        forwardButton.gameObject.SetActive(true);
+        //normalSound.gameObject.SetActive(true);
+        //slowSound.gameObject.SetActive(true);
     }
 
     /// <summary>
     /// Hide the menu but the back button
     /// </summary>
     public void HideMenu() {
-        backButton.enabled = true;
-        forwardButton.enabled = true;
-        //normalSound.enabled = true;
-        //slowSound.enabled = true;
+        if (menuHidden)
+            return;
+
+        menuHidden = true;
+        backButton.gameObject.SetActive(false);
+        forwardButton.gameObject.SetActive(false);
+        //normalSound.gameObject.SetActive(false);
+        //slowSound.gameObject.SetActive(false);
     }
 
     /// <summary>
@@ -132,6 +109,6 @@ public class StoryController : MonoBehaviour {
         audioSource.PlayOneShot(sentence);
 
         // Once the sentance has been played, show the menu to control scene
-        ShowMenu();
+        Invoke("ShowMenu", 3f);
     }
 }

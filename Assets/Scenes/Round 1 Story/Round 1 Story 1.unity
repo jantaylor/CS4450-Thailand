@@ -394,7 +394,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &379356807
 GameObject:
@@ -408,7 +408,7 @@ GameObject:
   - component: {fileID: 379356809}
   - component: {fileID: 379356808}
   m_Layer: 5
-  m_Name: Story Convas
+  m_Name: Story Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +483,7 @@ RectTransform:
   m_Children:
   - {fileID: 757496877}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1327,7 +1327,7 @@ RectTransform:
   - {fileID: 1947459148}
   - {fileID: 1841858844}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1585,10 +1585,10 @@ MonoBehaviour:
   word3: {fileID: 0}
   sentence: {fileID: 8300000, guid: f042ff5d4103fd74197abc0bbe2cec4d, type: 3}
   menuHidden: 0
-  backButton: {fileID: 1813166700}
-  forwardButton: {fileID: 627671084}
-  menuButton: {fileID: 1057824350}
-  normalSound: {fileID: 337252340}
+  backButton: {fileID: 1813166698}
+  forwardButton: {fileID: 627671082}
+  menuButton: {fileID: 1057824348}
+  normalSound: {fileID: 337252337}
   slowSound: {fileID: 0}
 --- !u!4 &1947459148
 Transform:
@@ -1694,7 +1694,7 @@ RectTransform:
   - {fileID: 337252338}
   - {fileID: 1057824349}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
