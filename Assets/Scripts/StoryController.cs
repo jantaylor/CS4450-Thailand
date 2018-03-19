@@ -26,6 +26,11 @@ public class StoryController : MonoBehaviour {
     public bool menuHidden;
 
     /// <summary>
+    /// Boolean for a check on if the player has completed the scene
+    /// </summary>
+    public bool sceneCompleted;
+
+    /// <summary>
     /// Game objects for UI Menu
     /// </summary>
     public GameObject backButton, forwardButton, menuButton, normalSound, slowSound;
@@ -36,6 +41,11 @@ public class StoryController : MonoBehaviour {
     public void Start() {
         HideMenu();
         //PlaySentence(); // Removed on request on sprint 1
+    }
+
+    public void Update() {
+        if (sceneCompleted && !audioSource.isPlaying)
+            ShowMenu();
     }
 
     /// <summary>
@@ -109,6 +119,6 @@ public class StoryController : MonoBehaviour {
         audioSource.PlayOneShot(sentence);
 
         // Once the sentance has been played, show the menu to control scene
-        Invoke("ShowMenu", 3f);
+        sceneCompleted = true;
     }
 }
