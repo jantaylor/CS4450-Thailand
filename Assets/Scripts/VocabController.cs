@@ -76,7 +76,6 @@ public class VocabController : MonoBehaviour {
 		// Load and randomize the vocab, then start at the first.
 		LoadJson();
 		languageIndex = Array.FindIndex(vocabJsonObject.languages, language => language.Equals(activeLanguage));
-		vocabJsonObject.GenerateRandomOrder();
 		Proceed(0);
 	}
 
@@ -87,6 +86,7 @@ public class VocabController : MonoBehaviour {
 	{
 		vocabJsonFile = Resources.Load<TextAsset>("vocab_" + activeStory + "_" + activeDifficulty).text;
 		vocabJsonObject = JsonUtility.FromJson<VocabResource>(vocabJsonFile);
+		vocabJsonObject.GenerateRandomOrder();
 	}
 
 	/// <summary>
@@ -124,7 +124,7 @@ public class VocabController : MonoBehaviour {
 	/// <summary>
 	/// Updates the UI with the information from the previous (i=-1), current (i=0), or next(i=1) vocab word
 	/// </summary>
-	/// <returns>Whether it can go farther in the direction i.
+	/// <returns>Whether it can go farther in the direction i.</returns>
 	public bool Proceed (int i)
 	{
 		SetupLanguageHelp();
