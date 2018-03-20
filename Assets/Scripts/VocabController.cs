@@ -274,12 +274,15 @@ public class VocabController : MonoBehaviour {
 	///<summary>
 	/// Shows the foreign language content if it is enabled (i.e. if not in round 4)
 	///</summary>
-	public void showLanguageHelp()
+	public void ShowLanguageHelp()
 	{
 		if (foreignHelp == 0)
 		{
 			foreignWord.gameObject.SetActive(true);
+			foreignWord.UpdateSize();
 			foreignDefinition.gameObject.SetActive(true);
+			foreignDefinition.UpdateSize();
+
 		}
 	}
 

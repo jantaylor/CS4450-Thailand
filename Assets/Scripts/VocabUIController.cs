@@ -18,7 +18,6 @@ public class VocabUIController : MonoBehaviour {
 
 	void OnClick(MonoBehaviour sender)
 	{
-		Debug.Log("UI Click");
 		GameObject gameObject = sender.GetComponent<GameObject>();
 		if (gameObject.name == "Arrow Right")
 		{
