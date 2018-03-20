@@ -1746,7 +1746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7fbb12f46b8719488c1050421f4ceb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vocabController: {fileID: 0}
+  vocabGameController: {fileID: 0}
 --- !u!1 &2121538336
 GameObject:
   m_ObjectHideFlags: 0
