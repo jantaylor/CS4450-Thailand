@@ -60,6 +60,7 @@ public class WordController : MonoBehaviour {
 			{
 				audioPlayer.Stop();
 			}
+			// audioClip.Speed = 0.5;
 			audioPlayer.PlayOneShot(audioClip);
 			vocabController.ShowLanguageHelp();
 	}

@@ -286,4 +286,20 @@ public class VocabController : MonoBehaviour {
 		}
 	}
 
+
+	///<summary>
+	/// Plays the sound of the foreign word (round 1) or the sound of the English word.
+	///</summary>
+	public void PlayPrimarySound()
+	{
+		if (englishWord.gameObject.activeSelf)
+		{
+			englishWord.PlaySound();
+		}
+		else
+		{
+			foreignWord.PlaySound();
+		}
+	}
+
 }
