@@ -62,7 +62,6 @@ public class WordController : MonoBehaviour {
 			}
 			// audioClip.Speed = 0.5;
 			audioPlayer.PlayOneShot(audioClip);
-			vocabController.ShowLanguageHelp();
 	}
 
 	void OnMouseUp()

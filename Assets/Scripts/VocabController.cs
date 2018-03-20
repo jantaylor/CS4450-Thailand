@@ -50,103 +50,9 @@ public class VocabController : MonoBehaviour {
 
 	private string vocabJsonFile;
 	private VocabResource vocabJsonObject;
-	private int[] randomOrder;
+	// private int[] randomOrder;
 	private int currentIndex;
 	private int languageIndex;
-
-	[System.Serializable]
-	public class VocabResource
-	{
-		public string[] languages;
-		public string audioRoot;
-		public string audioFile;
-		public string definitionAudioFile;
-		public string imageFile;
-		public VocabList[] vocab;
-
-		/// <summary>
-		/// Returns the name of the audio resource, replacing the placeholders in the template string
-		/// </summary>
-		/// <param name="index">The array index to retrieve info from.</param>
-		/// <returns>Name of the audio resource</returns>
-		public List<string> GetAudioPaths(int index)
-		{
-			List<string> paths = new List<string>();
-			string word = null;
-			foreach (var v in vocab)
-			{
-				word = (word == null)? v.words[index] : word;
-				string path = audioFile.Replace("{LANG}", v.language).Replace("{WORD}", word);
-				paths.Add(path);
-			}
-			return paths;
-		}
-
-		/// <summary>
-		/// Returns the name of the audio resource, replacing the placeholders in the template string
-		/// </summary>
-		/// <param name="index">The array index to retrieve info from.</param>
-		/// <returns>Name of the audio resource</returns>
-		public List<string> GetDefinitionPaths(int index)
-		{
-			List<string> paths = new List<string>();
-			string word = null;
-			foreach (var v in vocab)
-			{
-				word = (word == null)? v.words[index] : word;
-				string path = definitionAudioFile.Replace("{LANG}", v.language).Replace("{WORD}", word);
-				paths.Add(path);
-			}
-			return paths;
-		}
-
-		/// <summary>
-		/// Returns the name of the image resource, replacing the placeholders in the template string
-		/// </summary>
-		/// <param name="index">The array index to retrieve info from.</param>
-		/// <returns>Name of the image resource</returns>
-		public List<string> GetImagePaths(int index)
-		{
-			List<string> paths = new List<string>();
-			string word = null;
-			foreach (var v in vocab)
-			{
-				word = (word == null)? v.words[index] : word;
-				string path = imageFile.Replace("{WORD}", word);
-				paths.Add(path);
-			}
-			return paths;
-		}
-
-		/// <summary>
-		/// For debugging
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return "audioRoot: " + audioRoot + "; audioFile: " + audioFile + "; vocab: " + vocab.ToString();
-		}
-	};
-
-	/// <summary>
-	/// A class to contain an array of words of a specified language
-	/// </summary>
-	[System.Serializable]
-	public class VocabList
-	{
-		public string language;
-		public string[] words;
-		public string[] definitions;
-
-		/// <summary>
-		/// For debugging
-		/// <returns></returns>
-		/// </summary>
-		public override string ToString()
-		{
-			return words.ToString();
-		}
-	};
 
 
 	void Start () {
@@ -170,30 +76,8 @@ public class VocabController : MonoBehaviour {
 		// Load and randomize the vocab, then start at the first.
 		LoadJson();
 		languageIndex = Array.FindIndex(vocabJsonObject.languages, language => language.Equals(activeLanguage));
-		GenerateRandomOrder();
+		vocabJsonObject.GenerateRandomOrder();
 		Proceed(0);
-	}
-
-	/// <summary>
-	/// Creates an array of the index numbers of the vocab list in a random order
-	/// </summary>
-	/// <returns></returns>
-	void GenerateRandomOrder()
-	{
-		int length = vocabJsonObject.vocab[0].words.Length;
-		var random = new System.Random();
-		randomOrder = new int[length];
-
-		// Fisher-Yates "inside-out" algorithm
-		for (int i = 0; i < length; i++)
-		{
-			int j = random.Next(0, i + 1);
-			if (i != j)
-			{
-				randomOrder[i] = randomOrder[j];
-			}
-			randomOrder[j] = i;
-		}
 	}
 
 	/// <summary>
@@ -250,25 +134,21 @@ public class VocabController : MonoBehaviour {
 		foreignDefinition.gameObject.SetActive((foreignHelp == 1));
 		foreignHelpIcon.gameObject.SetActive((foreignHelp == 0));
 
-		if (currentIndex + i > -1 && currentIndex + i < randomOrder.Length)
+		if (currentIndex + i > -1 && currentIndex + i < vocabJsonObject.Length)
 		{
 			// advance the vocab index
 			currentIndex += i;
 
-			// Get the paths to the resources
-			var audioPaths = vocabJsonObject.GetAudioPaths(randomOrder[currentIndex]);
-			var definitionPaths = vocabJsonObject.GetDefinitionPaths(randomOrder[currentIndex]);
-			var imagePaths = vocabJsonObject.GetImagePaths(randomOrder[currentIndex]);
-
 			// Update the UI
-			image.sprite = Resources.Load<Sprite>(imagePaths[0]);
-			englishWord.UpdateWord(vocabJsonObject.vocab[0].words[randomOrder[currentIndex]], audioPaths[0]);
-			englishDefinition.UpdateWord(vocabJsonObject.vocab[0].definitions[randomOrder[currentIndex]], definitionPaths[0]);
+			image.sprite = Resources.Load<Sprite>(vocabJsonObject.GetImagePath(currentIndex));
 
-			foreignWord.UpdateWord(vocabJsonObject.vocab[languageIndex].words[randomOrder[currentIndex]], audioPaths[languageIndex]);
-			foreignDefinition.UpdateWord(vocabJsonObject.vocab[languageIndex].definitions[randomOrder[currentIndex]], definitionPaths[languageIndex]);
+			englishWord.UpdateWord(vocabJsonObject.GetWord(0, currentIndex), vocabJsonObject.GetWordAudioPath(0, currentIndex));
+			englishDefinition.UpdateWord(vocabJsonObject.GetDefinition(0, currentIndex), vocabJsonObject.GetDefinitionAudioPath(0, currentIndex));
 
-			return (currentIndex + i > -1 && currentIndex + i < randomOrder.Length);
+			foreignWord.UpdateWord(vocabJsonObject.GetWord(languageIndex, currentIndex), vocabJsonObject.GetWordAudioPath(languageIndex, currentIndex));
+			foreignDefinition.UpdateWord(vocabJsonObject.GetDefinition(languageIndex, currentIndex), vocabJsonObject.GetDefinitionAudioPath(languageIndex, currentIndex));
+
+			return (currentIndex + i > -1 && currentIndex + i < vocabJsonObject.Length);
 		}
 		else
 		{
