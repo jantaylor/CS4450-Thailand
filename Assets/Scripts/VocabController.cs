@@ -46,6 +46,7 @@ public class VocabController : MonoBehaviour {
 	private WordController foreignWord;
 	private WordController englishDefinition;
 	private WordController foreignDefinition;
+	private HelpController foreignHelpIcon;
 
 	private string vocabJsonFile;
 	private VocabResource vocabJsonObject;
@@ -157,11 +158,12 @@ public class VocabController : MonoBehaviour {
 
 		// Initialize the index and the children element references
 		currentIndex = 0;
-		englishWord = GetComponentsInChildren<WordController>()[0];
-		foreignWord = GetComponentsInChildren<WordController>()[1];
-		englishDefinition = GetComponentsInChildren<WordController>()[2];
-		foreignDefinition = GetComponentsInChildren<WordController>()[3];
-		image = GameObject.Find("Vocab Image").GetComponent<SpriteRenderer>();
+		englishWord = transform.Find("Word English").GetComponent<WordController>();
+		foreignWord = transform.Find("Word Foreign").GetComponent<WordController>();
+		englishDefinition = transform.Find("Definition English").GetComponent<WordController>();
+		foreignDefinition = transform.Find("Definition Foreign").GetComponent<WordController>();
+		image = transform.Find("Vocab Image").GetComponent<SpriteRenderer>();
+		foreignHelpIcon = transform.Find("Help Foreign").GetComponent<HelpController>();
 
 		SetupLanguageHelp();
 
@@ -238,13 +240,15 @@ public class VocabController : MonoBehaviour {
 	/// <summary>
 	/// Updates the UI with the information from the previous (i=-1), current (i=0), or next(i=1) vocab word
 	/// </summary>
-	public void Proceed (int i)
+	/// <returns>Whether it can go farther in the direction i.
+	public bool Proceed (int i)
 	{
 		SetupLanguageHelp();
 		englishWord.gameObject.SetActive((english == 1));
 		englishDefinition.gameObject.SetActive((english == 1));
 		foreignWord.gameObject.SetActive((foreignHelp == 1));
 		foreignDefinition.gameObject.SetActive((foreignHelp == 1));
+		foreignHelpIcon.gameObject.SetActive((foreignHelp == 0));
 
 		if (currentIndex + i > -1 && currentIndex + i < randomOrder.Length)
 		{
@@ -264,10 +268,11 @@ public class VocabController : MonoBehaviour {
 			foreignWord.UpdateWord(vocabJsonObject.vocab[languageIndex].words[randomOrder[currentIndex]], audioPaths[languageIndex]);
 			foreignDefinition.UpdateWord(vocabJsonObject.vocab[languageIndex].definitions[randomOrder[currentIndex]], definitionPaths[languageIndex]);
 
+			return (currentIndex + i > -1 && currentIndex + i < randomOrder.Length);
 		}
 		else
 		{
-			GameState.Instance.LoadMenu();
+			return false;
 		}
 	}
 
@@ -282,7 +287,7 @@ public class VocabController : MonoBehaviour {
 			foreignWord.UpdateSize();
 			foreignDefinition.gameObject.SetActive(true);
 			foreignDefinition.UpdateSize();
-
+			foreignHelpIcon.gameObject.SetActive(false);
 		}
 	}
 
