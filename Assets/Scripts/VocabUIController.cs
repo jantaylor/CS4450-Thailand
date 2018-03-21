@@ -8,6 +8,7 @@ public class VocabUIController : MonoBehaviour {
 
 	private GameObject forwardButton;
 	private GameObject backButton;
+	private GameObject checkButton;
 
 	// Use this for initialization
 	void Start () {
@@ -15,24 +16,13 @@ public class VocabUIController : MonoBehaviour {
 		forwardButton = transform.Find("Arrow Right").gameObject;
 		backButton = transform.Find("Arrow Left").gameObject;
 		backButton.SetActive(false);
+		checkButton = transform.Find("Check").gameObject;
+		checkButton.SetActive(false);
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-	}
-
-	void OnClick(MonoBehaviour sender)
-	{
-		GameObject gameObject = sender.GetComponent<GameObject>();
-		if (gameObject.name == "Arrow Right")
-		{
-			vocabController.Proceed(1);
-		}
-		if (gameObject.name == "Arrow Left")
-		{
-			vocabController.Proceed(-1);
-		}
 	}
 
 	public void Back()
@@ -41,7 +31,7 @@ public class VocabUIController : MonoBehaviour {
 		{
 			backButton.SetActive(false);
 		}
-
+		checkButton.SetActive(false);
 		forwardButton.SetActive(true);
 	}
 
@@ -50,8 +40,14 @@ public class VocabUIController : MonoBehaviour {
 		if (!vocabController.Proceed(1))
 		{
 			forwardButton.SetActive(false);
+			checkButton.SetActive(true);
 		}
 		backButton.SetActive(true);
+	}
+
+	public void Finish()
+	{
+		GameState.Instance.LoadScene(4, GameState.Instance.ActiveRound);
 	}
 
 	public void Menu()

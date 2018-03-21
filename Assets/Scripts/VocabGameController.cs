@@ -45,7 +45,7 @@ public class VocabGameController : MonoBehaviour {
 		numOptions = GameState.Instance.ActiveDifficulty + GameState.Instance.ActiveRound;
 		numOptions = (numOptions > vocabResource.Length)? vocabResource.Length : numOptions;
 		numOptions = (numOptions < 2)? 2 : numOptions;
-		Debug.Log(GameState.Instance.ActiveDifficulty + " + " + GameState.Instance.ActiveRound + " = " + numOptions);
+		// Debug.Log(GameState.Instance.ActiveDifficulty + " + " + GameState.Instance.ActiveRound + " = " + numOptions);
 
 		for (int i = 0; i < numOptions; i++)
 		{
@@ -53,6 +53,8 @@ public class VocabGameController : MonoBehaviour {
 			option.transform.SetParent(optionsContainer.transform);
 			options.Add(option);
 		}
+
+		// TODO: Center the options.
 	}
 
 	public bool Proceed(int change)
@@ -89,11 +91,11 @@ public class VocabGameController : MonoBehaviour {
 				break;
 			case 3:
 				imagePrompt.gameObject.SetActive(true);
-				imagePrompt.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(vocabResource.GetWordAudioPath(0, currentIndex));
+				imagePrompt.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(vocabResource.GetImagePath(currentIndex));
 				break;
 			case 4:
 				wordPrompt.gameObject.SetActive(true);
-				wordPrompt.UpdateWord(vocabResource.GetWord(0, currentIndex), vocabResource.GetWordAudioPath(0, currentIndex));
+				wordPrompt.UpdateWord("", vocabResource.GetWordAudioPath(0, currentIndex));
 				break;
 		}
 
@@ -109,11 +111,19 @@ public class VocabGameController : MonoBehaviour {
 		// Get indices for random words as options
 		for (int i = 1; i < options.Count; i++)
 		{
-			int j;
+			int j, temp = -1;
 			do
 			{
 				j = random.Next(vocabResource.Length);
-			}	while (j == currentIndex);
+				// check against existing array elements:
+				try
+				{
+					temp = Array.FindIndex(wordIndices, value => value == j);
+				} catch (ArgumentNullException e)
+				{
+					temp = -1;
+				}
+			}	while (temp != -1);
 
 			wordIndices[i] = j;
 		}
@@ -142,7 +152,7 @@ public class VocabGameController : MonoBehaviour {
 			{
 				case 1: displayType = 1; break;
 				case 2: displayType = 1; break;
-				case 3: displayType = random.Next(1, 3); break;
+				case 3: displayType = 3; break;
 				case 4: displayType = 4; break;
 				default: displayType = 1; break;
 			}

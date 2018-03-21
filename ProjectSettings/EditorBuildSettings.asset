@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Vocab.unity
     guid: 8765a68f1a2e27945b66c729cb610ee0
   - enabled: 1
+    path: Assets/Scenes/Vocab Game.unity
+    guid: 0999a99592c79f54eb5ce9be279d0770
+  - enabled: 1
     path: Assets/Scenes/Round 2 Vocab.unity
     guid: e61a0870ef355ab4aac68bc44526057a
   - enabled: 1

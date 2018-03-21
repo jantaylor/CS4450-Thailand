@@ -8,14 +8,19 @@ public class VocabGameUIController : MonoBehaviour {
 
 	private GameObject forwardButton;
 	private GameObject backButton;
+	private GameObject checkButton;
+	private bool isLastVocab;
 
 	// Use this for initialization
 	void Start () {
 		vocabGameController = GameObject.Find("Vocab Container").GetComponent<VocabGameController>();
 		forwardButton = transform.Find("Arrow Right").gameObject;
 		backButton = transform.Find("Arrow Left").gameObject;
+		checkButton = transform.Find("Check").gameObject;
 		forwardButton.SetActive(false);
 		backButton.SetActive(false);
+		checkButton.SetActive(false);
+		isLastVocab = false;
 	}
 
 	void OnClick(MonoBehaviour sender)
@@ -37,20 +42,36 @@ public class VocabGameUIController : MonoBehaviour {
 		{
 			backButton.SetActive(false);
 		}
-
+		checkButton.SetActive(false);
 		forwardButton.SetActive(true);
 	}
 
 	public void Forward()
 	{
-		vocabGameController.Proceed(1);
+		if (!vocabGameController.Proceed(1))
+		{
+			isLastVocab = true;
+		}
 		forwardButton.SetActive(false);
 		backButton.SetActive(true);
 	}
 
 	public void Match()
 	{
-		forwardButton.SetActive(true);
+		if (!isLastVocab)
+		{
+			forwardButton.SetActive(true);
+		}
+		else
+		{
+			checkButton.SetActive(true);
+		}
+	}
+
+	public void Finish()
+	{
+		// TODO: Gamestate save progress
+		Menu();
 	}
 
 	public void Menu()
