@@ -200,29 +200,28 @@ public class VocabGameController : MonoBehaviour {
 	/// </sumamry>
 	public void CheckMatch(string word)
 	{
-		if (word == vocabResource.GetWord(0, currentIndex))
+		foreach (var option in options)
 		{
-			gameUIController.Match();
-			foreach (var option in options)
+			if (word == vocabResource.GetWord(0, currentIndex))
 			{
 				if (option.GetComponent<VocabGameOption>().EnglishWord != word)
 				{
-					// TODO: Set the image to "_transparent"
-					option.SetActive(false);
+					option.GetComponent<VocabGameOption>().Display(-1);
+				}
+				else
+				{
+					gameUIController.Match();
 				}
 			}
-		}
-		else
-		{
-			foreach (var option in options)
+			else
 			{
 				if (option.GetComponent<VocabGameOption>().EnglishWord == word)
 				{
-					// TODO: Set the image to "_transparent"
-					option.SetActive(false);
+					option.GetComponent<VocabGameOption>().Display(-1);
 				}
 			}
 		}
+
 	}
 
 

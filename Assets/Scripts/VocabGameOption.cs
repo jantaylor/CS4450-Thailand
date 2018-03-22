@@ -35,6 +35,10 @@ public class VocabGameOption : MonoBehaviour {
 
 		switch (displayType)
 		{
+			case -1:
+				text.text = "";
+				image.sprite = Resources.Load<Sprite>("_transparent");
+				break;
 			case 1:
 				image.sprite = Resources.Load<Sprite>(ImagePath);
 				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
