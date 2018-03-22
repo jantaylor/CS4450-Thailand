@@ -39,10 +39,17 @@ public class VocabGameOption : MonoBehaviour {
 				image.sprite = Resources.Load<Sprite>(ImagePath);
 				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 				break;
-			case 2: text.text = ForeignWord; break;
-			case 3: text.text = EnglishWord; break;
+			case 2:
+				text.text = ForeignWord;
+				image.sprite = Resources.Load<Sprite>("_transparent");
+				break;
+			case 3:
+				text.text = EnglishWord;
+				image.sprite = Resources.Load<Sprite>("_transparent");
+				break;
 			case 4:
 				text.text = EnglishWord;
+				image.sprite = Resources.Load<Sprite>("_transparent");
 				touchEnabled = false;
 				speechEnabled = true;
 				break;
