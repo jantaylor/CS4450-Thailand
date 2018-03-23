@@ -18,6 +18,14 @@ public class VocabGameOption : MonoBehaviour {
 	public string EnglishAudioPath {get; set;}
 	public string ForeignAudioPath {get; set;}
 
+	public const int DISPLAY_WRONG = -1;
+	public const int DISPLAY_HIDDEN = 0;
+	public const int DISPLAY_IMAGE = 1;
+	public const int DISPLAY_FOREIGN = 2;
+	public const int DISPLAY_ENGLISH = 3;
+	public const int DISPLAY_ENGLISH_SPEECH = 4;
+
+
 	void Awake()
 	{
 		gameController = GameObject.Find("Vocab Container").GetComponent<VocabGameController>();
@@ -26,7 +34,7 @@ public class VocabGameOption : MonoBehaviour {
 	}
 
 	/// <summary>
-	///	Determines what type of options are available: 1: image; 2: Foreign word; 3: English word; 4: English word (speech activated)
+	///	Determines what type of options are available: -1: wrong answer (x) image; 0: hidden; 1: image; 2: Foreign word; 3: English word; 4: English word (speech activated)
 	/// </summary>
 	public void Display(int displayType)
 	{
@@ -35,23 +43,27 @@ public class VocabGameOption : MonoBehaviour {
 
 		switch (displayType)
 		{
-			case -1:
+			case DISPLAY_WRONG:
+				text.text = "";
+				image.sprite = Resources.Load<Sprite>("_x");
+				break;
+			case DISPLAY_HIDDEN:
 				text.text = "";
 				image.sprite = Resources.Load<Sprite>("_transparent");
 				break;
-			case 1:
+			case DISPLAY_IMAGE:
 				image.sprite = Resources.Load<Sprite>(ImagePath);
 				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 				break;
-			case 2:
+			case DISPLAY_FOREIGN:
 				text.text = ForeignWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
 				break;
-			case 3:
+			case DISPLAY_ENGLISH:
 				text.text = EnglishWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
 				break;
-			case 4:
+			case DISPLAY_ENGLISH_SPEECH:
 				text.text = EnglishWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
 				touchEnabled = false;

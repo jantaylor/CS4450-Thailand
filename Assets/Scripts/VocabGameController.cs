@@ -54,7 +54,6 @@ public class VocabGameController : MonoBehaviour {
 		numOptions = (numOptions > vocabResource.Length)? vocabResource.Length : numOptions;
 		numOptions = (numOptions < 2)? 2 : numOptions;
 		// numOptions += 3;
-		// Debug.Log(GameState.Instance.ActiveDifficulty + " + " + GameState.Instance.ActiveRound + " = " + numOptions);
 
 		for (int i = 0; i < numOptions; i++)
 		{
@@ -113,7 +112,6 @@ public class VocabGameController : MonoBehaviour {
 			case -1:
 			case 1:
 				wordPrompt.gameObject.SetActive(true);
-				// Debug.Log(vocabResource.GetWord(languageIndex, currentIndex));
 				wordPrompt.UpdateWord(vocabResource.GetWord(languageIndex, currentIndex), vocabResource.GetWordAudioPath(languageIndex, currentIndex));
 				break;
 			case 2:
@@ -183,11 +181,11 @@ public class VocabGameController : MonoBehaviour {
 			// Choose the type of options: See the VocabGameOption class Display() method for details.
 			switch (GameState.Instance.ActiveRound)
 			{
-				case 1: displayType = 1; break;
-				case 2: displayType = 1; break;
-				case 3: displayType = 3; break;
-				case 4: displayType = 4; break;
-				default: displayType = 1; break;
+				case 1: displayType = VocabGameOption.DISPLAY_IMAGE; break;
+				case 2: displayType = VocabGameOption.DISPLAY_IMAGE; break;
+				case 3: displayType = VocabGameOption.DISPLAY_ENGLISH; break;
+				case 4: displayType = VocabGameOption.DISPLAY_ENGLISH_SPEECH; break;
+				default: displayType = VocabGameOption.DISPLAY_IMAGE; break;
 			}
 			options[i].GetComponent<VocabGameOption>().Display(displayType);
 		}
@@ -202,22 +200,27 @@ public class VocabGameController : MonoBehaviour {
 	{
 		foreach (var option in options)
 		{
+			// If the correct option was selected:
 			if (word == vocabResource.GetWord(0, currentIndex))
 			{
+				// If the current option is not the selected (and correct) one:
 				if (option.GetComponent<VocabGameOption>().EnglishWord != word)
 				{
-					option.GetComponent<VocabGameOption>().Display(-1);
+					option.GetComponent<VocabGameOption>().Display(VocabGameOption.DISPLAY_HIDDEN);
 				}
+				// If the current option is the right/selected one:
 				else
 				{
 					gameUIController.Match();
 				}
 			}
+			// If the wrong option was selected:
 			else
 			{
+				// If the current option is the selected one:
 				if (option.GetComponent<VocabGameOption>().EnglishWord == word)
 				{
-					option.GetComponent<VocabGameOption>().Display(-1);
+					option.GetComponent<VocabGameOption>().Display(VocabGameOption.DISPLAY_WRONG);
 				}
 			}
 		}
