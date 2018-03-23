@@ -46,106 +46,13 @@ public class VocabController : MonoBehaviour {
 	private WordController foreignWord;
 	private WordController englishDefinition;
 	private WordController foreignDefinition;
+	private HelpController foreignHelpIcon;
 
 	private string vocabJsonFile;
 	private VocabResource vocabJsonObject;
-	private int[] randomOrder;
+	// private int[] randomOrder;
 	private int currentIndex;
 	private int languageIndex;
-
-	[System.Serializable]
-	public class VocabResource
-	{
-		public string[] languages;
-		public string audioRoot;
-		public string audioFile;
-		public string definitionAudioFile;
-		public string imageFile;
-		public VocabList[] vocab;
-
-		/// <summary>
-		/// Returns the name of the audio resource, replacing the placeholders in the template string
-		/// </summary>
-		/// <param name="index">The array index to retrieve info from.</param>
-		/// <returns>Name of the audio resource</returns>
-		public List<string> GetAudioPaths(int index)
-		{
-			List<string> paths = new List<string>();
-			string word = null;
-			foreach (var v in vocab)
-			{
-				word = (word == null)? v.words[index] : word;
-				string path = audioFile.Replace("{LANG}", v.language).Replace("{WORD}", word);
-				paths.Add(path);
-			}
-			return paths;
-		}
-
-		/// <summary>
-		/// Returns the name of the audio resource, replacing the placeholders in the template string
-		/// </summary>
-		/// <param name="index">The array index to retrieve info from.</param>
-		/// <returns>Name of the audio resource</returns>
-		public List<string> GetDefinitionPaths(int index)
-		{
-			List<string> paths = new List<string>();
-			string word = null;
-			foreach (var v in vocab)
-			{
-				word = (word == null)? v.words[index] : word;
-				string path = definitionAudioFile.Replace("{LANG}", v.language).Replace("{WORD}", word);
-				paths.Add(path);
-			}
-			return paths;
-		}
-
-		/// <summary>
-		/// Returns the name of the image resource, replacing the placeholders in the template string
-		/// </summary>
-		/// <param name="index">The array index to retrieve info from.</param>
-		/// <returns>Name of the image resource</returns>
-		public List<string> GetImagePaths(int index)
-		{
-			List<string> paths = new List<string>();
-			string word = null;
-			foreach (var v in vocab)
-			{
-				word = (word == null)? v.words[index] : word;
-				string path = imageFile.Replace("{WORD}", word);
-				paths.Add(path);
-			}
-			return paths;
-		}
-
-		/// <summary>
-		/// For debugging
-		/// </summary>
-		/// <returns></returns>
-		public override string ToString()
-		{
-			return "audioRoot: " + audioRoot + "; audioFile: " + audioFile + "; vocab: " + vocab.ToString();
-		}
-	};
-
-	/// <summary>
-	/// A class to contain an array of words of a specified language
-	/// </summary>
-	[System.Serializable]
-	public class VocabList
-	{
-		public string language;
-		public string[] words;
-		public string[] definitions;
-
-		/// <summary>
-		/// For debugging
-		/// <returns></returns>
-		/// </summary>
-		public override string ToString()
-		{
-			return words.ToString();
-		}
-	};
 
 
 	void Start () {
@@ -157,41 +64,19 @@ public class VocabController : MonoBehaviour {
 
 		// Initialize the index and the children element references
 		currentIndex = 0;
-		englishWord = GetComponentsInChildren<WordController>()[0];
-		foreignWord = GetComponentsInChildren<WordController>()[1];
-		englishDefinition = GetComponentsInChildren<WordController>()[2];
-		foreignDefinition = GetComponentsInChildren<WordController>()[3];
-		image = GameObject.Find("Vocab Image").GetComponent<SpriteRenderer>();
+		englishWord = transform.Find("Word English").GetComponent<WordController>();
+		foreignWord = transform.Find("Word Foreign").GetComponent<WordController>();
+		englishDefinition = transform.Find("Definition English").GetComponent<WordController>();
+		foreignDefinition = transform.Find("Definition Foreign").GetComponent<WordController>();
+		image = transform.Find("Vocab Image").GetComponent<SpriteRenderer>();
+		foreignHelpIcon = transform.Find("Help Foreign").GetComponent<HelpController>();
 
 		SetupLanguageHelp();
 
 		// Load and randomize the vocab, then start at the first.
 		LoadJson();
 		languageIndex = Array.FindIndex(vocabJsonObject.languages, language => language.Equals(activeLanguage));
-		GenerateRandomOrder();
 		Proceed(0);
-	}
-
-	/// <summary>
-	/// Creates an array of the index numbers of the vocab list in a random order
-	/// </summary>
-	/// <returns></returns>
-	void GenerateRandomOrder()
-	{
-		int length = vocabJsonObject.vocab[0].words.Length;
-		var random = new System.Random();
-		randomOrder = new int[length];
-
-		// Fisher-Yates "inside-out" algorithm
-		for (int i = 0; i < length; i++)
-		{
-			int j = random.Next(0, i + 1);
-			if (i != j)
-			{
-				randomOrder[i] = randomOrder[j];
-			}
-			randomOrder[j] = i;
-		}
 	}
 
 	/// <summary>
@@ -201,6 +86,7 @@ public class VocabController : MonoBehaviour {
 	{
 		vocabJsonFile = Resources.Load<TextAsset>("vocab_" + activeStory + "_" + activeDifficulty).text;
 		vocabJsonObject = JsonUtility.FromJson<VocabResource>(vocabJsonFile);
+		vocabJsonObject.GenerateRandomOrder();
 	}
 
 	/// <summary>
@@ -238,48 +124,66 @@ public class VocabController : MonoBehaviour {
 	/// <summary>
 	/// Updates the UI with the information from the previous (i=-1), current (i=0), or next(i=1) vocab word
 	/// </summary>
-	public void Proceed (int i)
+	/// <returns>Whether it can go farther in the direction i.</returns>
+	public bool Proceed (int i)
 	{
 		SetupLanguageHelp();
 		englishWord.gameObject.SetActive((english == 1));
 		englishDefinition.gameObject.SetActive((english == 1));
 		foreignWord.gameObject.SetActive((foreignHelp == 1));
 		foreignDefinition.gameObject.SetActive((foreignHelp == 1));
+		foreignHelpIcon.gameObject.SetActive((foreignHelp == 0));
 
-		if (currentIndex + i > -1 && currentIndex + i < randomOrder.Length)
+		if (currentIndex + i > -1 && currentIndex + i < vocabJsonObject.Length)
 		{
 			// advance the vocab index
 			currentIndex += i;
 
-			// Get the paths to the resources
-			var audioPaths = vocabJsonObject.GetAudioPaths(randomOrder[currentIndex]);
-			var definitionPaths = vocabJsonObject.GetDefinitionPaths(randomOrder[currentIndex]);
-			var imagePaths = vocabJsonObject.GetImagePaths(randomOrder[currentIndex]);
-
 			// Update the UI
-			image.sprite = Resources.Load<Sprite>(imagePaths[0]);
-			englishWord.UpdateWord(vocabJsonObject.vocab[0].words[randomOrder[currentIndex]], audioPaths[0]);
-			englishDefinition.UpdateWord(vocabJsonObject.vocab[0].definitions[randomOrder[currentIndex]], definitionPaths[0]);
+			image.sprite = Resources.Load<Sprite>(vocabJsonObject.GetImagePath(currentIndex));
 
-			foreignWord.UpdateWord(vocabJsonObject.vocab[languageIndex].words[randomOrder[currentIndex]], audioPaths[languageIndex]);
-			foreignDefinition.UpdateWord(vocabJsonObject.vocab[languageIndex].definitions[randomOrder[currentIndex]], definitionPaths[languageIndex]);
+			englishWord.UpdateWord(vocabJsonObject.GetWord(0, currentIndex), vocabJsonObject.GetWordAudioPath(0, currentIndex));
+			englishDefinition.UpdateWord(vocabJsonObject.GetDefinition(0, currentIndex), vocabJsonObject.GetDefinitionAudioPath(0, currentIndex));
 
+			foreignWord.UpdateWord(vocabJsonObject.GetWord(languageIndex, currentIndex), vocabJsonObject.GetWordAudioPath(languageIndex, currentIndex));
+			foreignDefinition.UpdateWord(vocabJsonObject.GetDefinition(languageIndex, currentIndex), vocabJsonObject.GetDefinitionAudioPath(languageIndex, currentIndex));
+
+			return (currentIndex + i > -1 && currentIndex + i < vocabJsonObject.Length);
 		}
 		else
 		{
-			GameState.Instance.LoadMenu();
+			return false;
 		}
 	}
 
 	///<summary>
 	/// Shows the foreign language content if it is enabled (i.e. if not in round 4)
 	///</summary>
-	public void showLanguageHelp()
+	public void ShowLanguageHelp()
 	{
 		if (foreignHelp == 0)
 		{
 			foreignWord.gameObject.SetActive(true);
+			foreignWord.UpdateSize();
 			foreignDefinition.gameObject.SetActive(true);
+			foreignDefinition.UpdateSize();
+			foreignHelpIcon.gameObject.SetActive(false);
+		}
+	}
+
+
+	///<summary>
+	/// Plays the sound of the foreign word (round 1) or the sound of the English word.
+	///</summary>
+	public void PlayPrimarySound()
+	{
+		if (englishWord.gameObject.activeSelf)
+		{
+			englishWord.PlaySound();
+		}
+		else
+		{
+			foreignWord.PlaySound();
 		}
 	}
 

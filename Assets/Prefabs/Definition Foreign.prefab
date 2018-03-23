@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114804759626418584}
   - component: {fileID: 61087266744757032}
   m_Layer: 0
-  m_Name: Definition Thai
+  m_Name: Definition Foreign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1a4b1cfa5a76a5409b87e47f2517cf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audio: {fileID: 0}
+  audioClip: {fileID: 0}
   word: 
 --- !u!224 &224321603599321126
 RectTransform:

@@ -187,12 +187,14 @@ public class GameState : MonoBehaviour {
     /// <param name="activity">int 1-3</param>
     /// <param name="round">int 1-4</param>
     public void LoadScene(int activity, int round) {
-        // Activity: -1 - menu, 1 - vocab, 2 - story, 3 - game
+        // Activity: -1 - menu, 1 - vocab, 2 - story, 3 - game, 4 - vocab game
         // Round: -1 - menu, 1 - easy, 2 - secondary
         if (activity == 1) {
             ActiveActivity = activity;
             ActiveRound = round;
             SceneManager.LoadScene("Vocab");
+        } else if (activity == 4) {
+            SceneManager.LoadScene("Vocab Game");
         } else if (activity == 2) {
             ActiveActivity = activity;
             ActiveRound = round;

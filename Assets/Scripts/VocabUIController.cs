@@ -6,9 +6,18 @@ public class VocabUIController : MonoBehaviour {
 
 	public VocabController vocabController;
 
+	private GameObject forwardButton;
+	private GameObject backButton;
+	private GameObject checkButton;
+
 	// Use this for initialization
 	void Start () {
 		vocabController = GameObject.Find("Vocab Container").GetComponent<VocabController>();
+		forwardButton = transform.Find("Arrow Right").gameObject;
+		backButton = transform.Find("Arrow Left").gameObject;
+		backButton.SetActive(false);
+		checkButton = transform.Find("Check").gameObject;
+		checkButton.SetActive(false);
 	}
 
 	// Update is called once per frame
@@ -16,28 +25,29 @@ public class VocabUIController : MonoBehaviour {
 
 	}
 
-	void OnClick(MonoBehaviour sender)
-	{
-		Debug.Log("UI Click");
-		GameObject gameObject = sender.GetComponent<GameObject>();
-		if (gameObject.name == "Arrow Right")
-		{
-			vocabController.Proceed(1);
-		}
-		if (gameObject.name == "Arrow Left")
-		{
-			vocabController.Proceed(-1);
-		}
-	}
-
 	public void Back()
 	{
-		vocabController.Proceed(-1);
+		if (!vocabController.Proceed(-1))
+		{
+			backButton.SetActive(false);
+		}
+		checkButton.SetActive(false);
+		forwardButton.SetActive(true);
 	}
 
 	public void Forward()
 	{
-		vocabController.Proceed(1);
+		if (!vocabController.Proceed(1))
+		{
+			forwardButton.SetActive(false);
+			checkButton.SetActive(true);
+		}
+		backButton.SetActive(true);
+	}
+
+	public void Finish()
+	{
+		GameState.Instance.LoadScene(4, GameState.Instance.ActiveRound);
 	}
 
 	public void Menu()
