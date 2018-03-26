@@ -1667,13 +1667,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Round 5
+  m_Text: Bonus
 --- !u!222 &819566448
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1973,6 +1973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f4a31b40165194ca4a59a175e2b133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  storyController: {fileID: 0}
 --- !u!1 &932337656
 GameObject:
   m_ObjectHideFlags: 0
