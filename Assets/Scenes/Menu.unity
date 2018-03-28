@@ -3012,7 +3012,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1865602363}
-  - component: {fileID: 1865602364}
   m_Layer: 5
   m_Name: Round 5 Menu
   m_TagString: Untagged
@@ -3040,19 +3039,6 @@ RectTransform:
   m_AnchoredPosition: {x: 220, y: -21}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1865602364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1865602362}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67c4a076160bedf47beedc152fe20869, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activity: 3
-  round: 5
 --- !u!1 &1874604511
 GameObject:
   m_ObjectHideFlags: 0
@@ -3208,6 +3194,7 @@ GameObject:
   - component: {fileID: 2084566994}
   - component: {fileID: 2084566993}
   - component: {fileID: 2084566992}
+  - component: {fileID: 2084566995}
   m_Layer: 0
   m_Name: Round 5 Game
   m_TagString: Untagged
@@ -3274,7 +3261,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2084566993}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2084566995}
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &2084566993
@@ -3312,6 +3310,19 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2084566990}
+--- !u!114 &2084566995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2084566990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67c4a076160bedf47beedc152fe20869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activity: 3
+  round: 5
 --- !u!1001 &2114640959
 Prefab:
   m_ObjectHideFlags: 0

@@ -218,7 +218,9 @@ public class GameState : MonoBehaviour {
             }
             SceneManager.LoadScene("Round " + round + " Story 1");
         } else if (activity == 3) {
-            // TODO
+            if (round == 5) {
+                SceneManager.LoadScene("Bonus Game");
+            } 
         } else {
             Debug.Log("Something went wrong. Not passing proper activity.");
             LoadMenu();
