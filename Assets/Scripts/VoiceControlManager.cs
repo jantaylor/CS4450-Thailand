@@ -22,6 +22,7 @@ public class VoiceControlManager : MonoBehaviour {
 	public SpeechHandler speechHandler;
 
 	private Text debugText;
+	private GameObject panel;
 	private GameObject startSpeech;
 	private GameObject cancelSpeech;
 	private SpeechRecognizerManager SpeechManager = null;
@@ -33,6 +34,7 @@ public class VoiceControlManager : MonoBehaviour {
 			isListening = value;
 			startSpeech.GetComponent<Image>().sprite = (value? stopSprite : enabledSprite);
 			cancelSpeech.SetActive(value);
+			panel.SetActive(value);
 		}
 	}
 
@@ -66,8 +68,9 @@ public class VoiceControlManager : MonoBehaviour {
 
 	void Start ()
 	{
-		startSpeech = transform.GetChild(0).gameObject;
-		cancelSpeech = transform.GetChild(1).gameObject;
+		panel = transform.GetChild(0).gameObject;
+		startSpeech = transform.GetChild(1).gameObject;
+		cancelSpeech = transform.GetChild(2).gameObject;
 
 		#if UNITY_EDITOR
 		debugText = GameObject.Find("DebugMesh").GetComponent<Text>();
