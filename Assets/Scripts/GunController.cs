@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour {
 
-    [SerializeField]
-    private float turnRateRadians = 2 * Mathf.PI;
-
     void Update() {
         // Get mouse position and set Z to far back
         Vector3 mousePos = Input.mousePosition;
@@ -16,6 +13,10 @@ public class GunController : MonoBehaviour {
         // Set look position to camera's point and calculate the transform difference
         Vector3 lookPos = Camera.main.ScreenToWorldPoint(mousePos);
         lookPos = lookPos - transform.position;
+
+        // Set limits for boundary
+        lookPos.x = Mathf.Clamp(lookPos.x, -10f, 8f);
+        lookPos.y = Mathf.Clamp(lookPos.y, 0f, 5f);
 
         // Rotate the axis
         Quaternion rotation = Quaternion.LookRotation(lookPos);
