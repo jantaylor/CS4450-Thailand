@@ -48,6 +48,8 @@ public class VoiceControlManager : MonoBehaviour {
 			}
 			else {
 				startSpeech.GetComponent<Image>().sprite = disabledSprite;
+				cancelSpeech.SetActive(false);
+				panel.SetActive(false);
 			}
 		}
 	}
@@ -98,6 +100,11 @@ public class VoiceControlManager : MonoBehaviour {
 			Debug.Log ("Speech recognition is not available on this device.");
 			Enabled = false;
 			return;
+		}
+
+		if (!GameState.Instance.SpeechEnabled)
+		{
+			Enabled = false;
 		}
 
 		// We pass the game object's name that will receive the callback messages.

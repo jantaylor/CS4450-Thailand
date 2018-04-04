@@ -8,18 +8,23 @@ using UnityEngine.UI;
 public class AudioPlaybackManager : MonoBehaviour {
 
 	private static AudioSource audioPlayer;
-	private GameObject primaryAudioObject;
+	private static string defaultClip;
 
 	void Awake()
 	{
 		audioPlayer = GameObject.Find("Audio Playback UI").GetComponent<AudioSource>();
 	}
 
+	public static void SetDefaultClip(string clip)
+	{
+		defaultClip = clip;
+	}
+
 	public void PlaySound()
 	{
-		if (primaryAudioObject != null)
+		if (defaultClip != null)
 		{
-			// primaryAudioObject.GetComponent<SoundPlayer>.PlaySound();
+			PlaySound(defaultClip);
 		}
 	}
 

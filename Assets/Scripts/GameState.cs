@@ -70,6 +70,12 @@ public class GameState : MonoBehaviour {
     private int activeAudioSpeed;
 
     /// <summary>
+    /// Whether the speech UI is enabled.
+    /// </summary>
+    [SerializeField]
+    private bool speechEnabled;
+
+    /// <summary>
     /// List of Round Names hard coded
     /// </summary>
     [SerializeField]
@@ -152,6 +158,15 @@ public class GameState : MonoBehaviour {
     public int ActiveAudioSpeed {
         get { return activeAudioSpeed; }
         set { activeAudioSpeed = value; }
+    }
+
+    /// <summary>
+    /// Get speech UI enabled-ness
+    /// </summary>
+    /// <returns>bool: whether enabled or not</returns>
+    public bool SpeechEnabled {
+        get { return speechEnabled; }
+        set { speechEnabled = value; }
     }
 
     /// <summary>
