@@ -6,19 +6,14 @@ using UnityEngine.UI;
 public class StoryController : MonoBehaviour {
 
     /// <summary>
-    /// The audiosource for playing sound
-    /// </summary>
-    public AudioSource audioSource;
-
-    /// <summary>
     /// The words that are read separately
     /// </summary>
-    public AudioClip word, word2, word3;
+    public string word, word2, word3;
 
     /// <summary>
     /// The sentence that is read
     /// </summary>
-    public AudioClip sentence;
+    public string sentence;
 
     /// <summary>
     /// Boolean for if the menu is hidden
@@ -49,7 +44,7 @@ public class StoryController : MonoBehaviour {
     }
 
     public void Update() {
-        if (sceneCompleted && !audioSource.isPlaying)
+        if (sceneCompleted && !AudioPlaybackManager.audioPlayer.isPlaying)
             ShowMenu();
     }
 
@@ -95,40 +90,40 @@ public class StoryController : MonoBehaviour {
     /// Play Word
     /// </summary>
     public void PlayWordOne() {
-        if (audioSource.isPlaying)
+        if (AudioPlaybackManager.audioPlayer.isPlaying)
             // audioSource.Stop(); - Sprint 1 fix
             return;
-        audioSource.PlayOneShot(word);
+        AudioPlaybackManager.PlaySound(word);
     }
 
     /// <summary>
     /// Play Word 2
     /// </summary>
     public void PlayWordTwo() {
-        if (audioSource.isPlaying)
+        if (AudioPlaybackManager.audioPlayer.isPlaying)
             // audioSource.Stop(); - Sprint 1 fix
             return;
-        audioSource.PlayOneShot(word2);
+        AudioPlaybackManager.PlaySound(word2);
     }
 
     /// <summary>
     /// Play Word 3
     /// </summary>
     public void PlayWordThree() {
-        if (audioSource.isPlaying)
+        if (AudioPlaybackManager.audioPlayer.isPlaying)
             // audioSource.Stop(); - Sprint 1 fix
             return;
-        audioSource.PlayOneShot(word3);
+        AudioPlaybackManager.PlaySound(word3);
     }
 
     /// <summary>
     /// Play sentence
     /// </summary>
     public void PlaySentence() {
-        if (audioSource.isPlaying)
+        if (AudioPlaybackManager.audioPlayer.isPlaying)
             //audioSource.Stop(); - Sprint 1 fix
             return;
-        audioSource.PlayOneShot(sentence);
+        AudioPlaybackManager.PlaySound(sentence);
 
         // Once the sentance has been played, show the menu to control scene
         sceneCompleted = true;

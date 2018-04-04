@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class AudioPlaybackManager : MonoBehaviour {
 
-	private static AudioSource audioPlayer;
+	public static AudioSource audioPlayer;
 	private static string defaultClip;
 
 	void Awake()
@@ -33,7 +33,7 @@ public class AudioPlaybackManager : MonoBehaviour {
 		AudioClip clip = Resources.Load<AudioClip>(clipName + "__speed_" + GameState.Instance.ActiveAudioSpeed);
 		clip = (clip != null)? clip : Resources.Load<AudioClip>(clipName);
 
-		if (audioPlayer.isPlaying)
+        if (audioPlayer.isPlaying)
 		{
 			audioPlayer.Stop();
 		}
