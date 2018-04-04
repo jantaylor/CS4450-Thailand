@@ -5,7 +5,16 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour {
 
+    public BonusGameController bonusGameController;
+
+    void Start() {
+        bonusGameController = FindObjectOfType<BonusGameController>();
+    }
+
     void Update() {
+        if (bonusGameController.gameOver)
+            return;
+
         // Get mouse position and set Z to far back
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 20.0f;
