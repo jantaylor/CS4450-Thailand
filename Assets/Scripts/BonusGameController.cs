@@ -9,9 +9,16 @@ public class BonusGameController : MonoBehaviour {
     /// </summary>
     public ParticleSystem water;
 
+    /// <summary>
+    /// Sfx array
+    /// </summary>
+    public AudioClip[] sfx;
+
+    private AudioSource audioSource;
+
 	// Use this for initialization
 	void Start () {
-		
+        audioSource = FindObjectOfType<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -21,10 +28,12 @@ public class BonusGameController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Restarts/starts particle system
+    /// Restarts/starts particle system and plays sfx
     /// </summary>
     public void Fire() {
         water.Stop();
         water.Play();
+        int rand = Random.Range(0, sfx.Length);
+        audioSource.PlayOneShot(sfx[rand]);
     }
 }
