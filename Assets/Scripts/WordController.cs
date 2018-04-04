@@ -12,6 +12,7 @@ public class WordController : MonoBehaviour {
 	private AudioSource audioPlayer;
 	private TextMesh textMesh;
 	private BoxCollider2D box;
+	private string audioPath;
 
 	void Awake() {
 		vocabController = GameObject.Find("Vocab Container").GetComponent<VocabController>();
@@ -34,6 +35,7 @@ public class WordController : MonoBehaviour {
 		this.word = word;
 		textMesh.text = word;
 		audioClip = Resources.Load<AudioClip>(audioPath);
+		this.audioPath = audioPath;
 		UpdateSize();
 	}
 
@@ -56,12 +58,13 @@ public class WordController : MonoBehaviour {
 	/// </summary>
 	public void PlaySound()
 	{
-			if (audioPlayer.isPlaying)
-			{
-				audioPlayer.Stop();
-			}
-			// audioClip.Speed = 0.5;
-			audioPlayer.PlayOneShot(audioClip);
+		AudioPlaybackManager.PlaySound(audioPath);
+			// if (audioPlayer.isPlaying)
+			// {
+			// 	audioPlayer.Stop();
+			// }
+			// // audioClip.Speed = 0.5;
+			// audioPlayer.PlayOneShot(audioClip);
 	}
 
 	void OnMouseUp()

@@ -53,6 +53,7 @@ public class VocabGameOption : MonoBehaviour {
 			case DISPLAY_HIDDEN:
 				text.text = "";
 				image.sprite = Resources.Load<Sprite>("_transparent");
+				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 				break;
 			case DISPLAY_IMAGE:
 				image.sprite = Resources.Load<Sprite>(ImagePath);
@@ -81,7 +82,7 @@ public class VocabGameOption : MonoBehaviour {
 
 	public void CheckMatch()
 	{
-		audioPlayer.PlayOneShot(audioClip);
+		AudioPlaybackManager.PlaySound(EnglishAudioPath);
 		gameController.CheckMatch(EnglishWord);
 	}
 }
