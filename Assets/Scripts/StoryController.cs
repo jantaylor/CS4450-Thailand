@@ -33,7 +33,12 @@ public class StoryController : MonoBehaviour {
     /// <summary>
     /// Game objects for UI Menu
     /// </summary>
-    public GameObject backButton, forwardButton, menuButton, normalSound, slowSound;
+    public GameObject backButton, forwardButton, menuButton, normalSound;
+
+    /// <summary>
+    /// Checkmark button for last scene
+    /// </summary>
+    public Sprite checkMark;
 
     /// <summary>
     /// Play sentence when loading the scene
@@ -58,10 +63,15 @@ public class StoryController : MonoBehaviour {
         menuHidden = false;
         int activeScene = GameState.Instance.ActiveScene;
         // don't show the back button on first scenes of story
-        if (activeScene != 0 && activeScene != 8 && activeScene != 16 && activeScene != 24) {
+        if (activeScene != 0 && activeScene != 8 && activeScene != 16 && activeScene != 24)
             backButton.gameObject.SetActive(true);
-        }
+
+        // Change last scene to display checkmark instead
+        if (activeScene == 7 || activeScene == 15 || activeScene == 23 || activeScene == 31)
+            forwardButton.GetComponent<Image>().sprite = checkMark;
+
         forwardButton.gameObject.SetActive(true);
+        menuButton.gameObject.SetActive(true);
         //normalSound.gameObject.SetActive(true);
         //slowSound.gameObject.SetActive(true);
     }
@@ -76,6 +86,7 @@ public class StoryController : MonoBehaviour {
         menuHidden = true;
         backButton.gameObject.SetActive(false);
         forwardButton.gameObject.SetActive(false);
+        menuButton.gameObject.SetActive(false);
         //normalSound.gameObject.SetActive(false);
         //slowSound.gameObject.SetActive(false);
     }
