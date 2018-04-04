@@ -12,9 +12,9 @@ public class GameState : MonoBehaviour {
     public const int ACTIVITY_VOCAB_GAME = 4;
     public const int ACTIVITY_MATCH_GAME = 5;
 
-    public const int AUDIO_SPEED_SLOW = 0;
-    public const int AUDIO_SPEED_MEDIUM = 1;
-    public const int AUDIO_SPEED_FAST = 2;
+    public const int AUDIO_SPEED_SLOW = 1;
+    public const int AUDIO_SPEED_MEDIUM = 2;
+    public const int AUDIO_SPEED_FAST = 3;
 
     public const int DIFFICULTY_BEGINNER = 1;
     public const int DIFFICULTY_INTERMEDIATE = 2;

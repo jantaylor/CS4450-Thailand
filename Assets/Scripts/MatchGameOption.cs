@@ -115,11 +115,12 @@ public class MatchGameOption : MonoBehaviour {
 	/// </summary>
 	public void PlaySound()
 	{
-			if (audioPlayer.isPlaying)
-			{
-				audioPlayer.Stop();
-			}
-			// audioClip.Speed = 0.5;
-			audioPlayer.PlayOneShot(audioClip);
+		AudioPlaybackManager.PlaySound(EnglishAudioPath);
+			// if (audioPlayer.isPlaying)
+			// {
+			// 	audioPlayer.Stop();
+			// }
+			// // audioClip.Speed = 0.5;
+			// audioPlayer.PlayOneShot(audioClip);
 	}
 }

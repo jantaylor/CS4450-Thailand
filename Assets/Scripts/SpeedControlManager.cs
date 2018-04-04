@@ -37,7 +37,11 @@ public class SpeedControlManager : MonoBehaviour {
 		UpdateSpeedUI();
 
 		#if UNITY_EDITOR
-		debugText = GameObject.Find("DebugMesh").GetComponent<Text>();
+		GameObject debugObject = GameObject.Find("DebugMesh");
+		if (debugObject != null)
+		{
+			debugText = debugObject.GetComponent<Text>();
+		}
 		#endif
 	}
 

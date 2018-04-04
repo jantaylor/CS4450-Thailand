@@ -73,7 +73,11 @@ public class VoiceControlManager : MonoBehaviour {
 		cancelSpeech = transform.GetChild(2).gameObject;
 
 		#if UNITY_EDITOR
-		debugText = GameObject.Find("DebugMesh").GetComponent<Text>();
+		GameObject debugObject = GameObject.Find("DebugMesh");
+		if (debugObject != null)
+		{
+			debugText = debugObject.GetComponent<Text>();
+		}
 		#endif
 
 		IsListening = false;
@@ -232,7 +236,10 @@ public class VoiceControlManager : MonoBehaviour {
 		Debug.Log (message);
 
 		#if UNITY_EDITOR
-		debugText.text = message;
+		if (debugText != null)
+		{
+			debugText.text = message;
+		}
 		#endif
 	}
 
