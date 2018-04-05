@@ -120,6 +120,5 @@ public class BonusGameController : MonoBehaviour {
         water.Play();
         int rand = Random.Range(0, sfx.Length);
         audioSource.PlayOneShot(sfx[rand]);
-        Score++;
     }
 }
