@@ -24,7 +24,9 @@ public class Balloon : MonoBehaviour {
     }
 
     void OnCollissionEnter(Collision other) {
+        Debug.Log("Collider hit");
         if (other.gameObject.CompareTag("Water")) {
+            Debug.Log("Balloon Hit");
             gameController.Score += balloonValue;
             Destroy(this.gameObject);
         }

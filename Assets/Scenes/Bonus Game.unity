@@ -144,11 +144,11 @@ RectTransform:
   m_Father: {fileID: 275713751}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 1}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 40}
-  m_Pivot: {x: 0.5, y: 1}
+  m_SizeDelta: {x: 160, y: 60}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &108869013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,11 +170,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1639,21 +1639,76 @@ Prefab:
     - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
         type: 2}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
         type: 2}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
         type: 2}
       propertyPath: ShapeModule.radiusThickness
-      value: 1.0000
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1573342236986250, guid: 3624a353ac24d7149a5ed59d91c546cf, type: 2}
       propertyPath: m_TagString
       value: Water
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: CollisionModule.quality
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: CollisionModule.collisionMessages
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: CollisionModule.multiplyColliderForceByParticleSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: CollisionModule.multiplyColliderForceByParticleSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 198814271435553436, guid: 3624a353ac24d7149a5ed59d91c546cf,
+        type: 2}
+      propertyPath: ShapeModule.radiusThickness
+      value: 1.0000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3624a353ac24d7149a5ed59d91c546cf, type: 2}
@@ -1775,13 +1830,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584e4f48f1ed5f64d96a0ed18ebe81da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1787716608}
   balloons:
   - {fileID: 1842321573942284, guid: 6ba3d63e949f2714b99585f21c641d09, type: 2}
   - {fileID: 1315319408919656, guid: f94e344a2415db54e90c001ab91053a0, type: 2}
   - {fileID: 1816239127542530, guid: 2bf27abf1386b1d40ab1fab1256d0e04, type: 2}
   - {fileID: 1217355747708906, guid: 88db0d3f77ab5b34d9912d48fcb518b7, type: 2}
   - {fileID: 1147414934977230, guid: 4451acc24bd83b247a37169bcbce19ea, type: 2}
-  startTime: 1
+  startTime: 0
   spawnTime: 1.3
   minX: -100
   maxX: 100

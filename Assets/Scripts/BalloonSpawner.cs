@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class BalloonSpawner : MonoBehaviour {
 
+    public BonusGameController gameController;
+
     public GameObject[] balloons;
 
-    public float startTime = 2f;
+    public float startTime = 0f;
 
     public float spawnTime = 1.1f;
 
@@ -25,7 +27,8 @@ public class BalloonSpawner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+        if (gameController.gameOver)
+            CancelInvoke();
     }
 
     private void SpawnBalloon() {
