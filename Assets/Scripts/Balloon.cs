@@ -22,13 +22,4 @@ public class Balloon : MonoBehaviour {
         if (other.gameObject.CompareTag("Floor"))
             Destroy(this.gameObject);
     }
-
-    void OnCollissionEnter(Collision other) {
-        Debug.Log("Collider hit");
-        if (other.gameObject.CompareTag("Water")) {
-            Debug.Log("Balloon Hit");
-            gameController.Score += balloonValue;
-            Destroy(this.gameObject);
-        }
-    }
 }

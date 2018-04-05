@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class WaterController : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public BonusGameController gameController;
+
+    void OnParticleCollision(GameObject other) {
+        if (other.CompareTag("Balloon")) {
+            gameController.Score += other.GetComponent<Balloon>().balloonValue;
+            Destroy(other.gameObject);
+        }
+    }
 }
