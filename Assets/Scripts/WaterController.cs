@@ -9,7 +9,7 @@ public class WaterController : MonoBehaviour {
     void OnParticleCollision(GameObject other) {
         if (other.CompareTag("Balloon")) {
             gameController.Score += other.GetComponent<Balloon>().balloonValue;
-            Destroy(other.gameObject);
+            other.GetComponent<Balloon>().Explode();
         }
     }
 }

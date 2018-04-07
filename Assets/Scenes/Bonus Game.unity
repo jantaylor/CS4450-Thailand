@@ -931,6 +931,16 @@ Prefab:
       propertyPath: gameController
       value: 
       objectReference: {fileID: 1787716608}
+    - target: {fileID: 198619345203972532, guid: acc04758a21a72142b0f0d8f5f40b72e,
+        type: 2}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 198619345203972532, guid: acc04758a21a72142b0f0d8f5f40b72e,
+        type: 2}
+      propertyPath: randomSeed
+      value: -1893878752
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: acc04758a21a72142b0f0d8f5f40b72e, type: 2}
   m_IsPrefabParent: 0
