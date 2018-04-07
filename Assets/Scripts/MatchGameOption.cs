@@ -63,6 +63,7 @@ public class MatchGameOption : MonoBehaviour {
 	{
 		text.text = "";
 		image.sprite = null;
+		image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 
 		switch (displayType)
 		{
@@ -80,7 +81,6 @@ public class MatchGameOption : MonoBehaviour {
 				break;
 			case DISPLAY_IMAGE:
 				image.sprite = Resources.Load<Sprite>(ImagePath);
-				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 				break;
 			case DISPLAY_FOREIGN:
 				text.text = ForeignWord;

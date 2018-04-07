@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
 
 public class VocabController : SpeechHandler {
@@ -41,13 +42,14 @@ public class VocabController : SpeechHandler {
 	/// </summary>
 	public int speech;
 
-	private SpriteRenderer image;
+	private Image image;
 	private WordController englishWord;
 	private WordController foreignWord;
 	private WordController englishDefinition;
 	private WordController foreignDefinition;
 	private HelpController foreignHelpIcon;
 	private VocabUIController uiController;
+	private GameObject resultAnimation;
 
 	private string vocabJsonFile;
 	private VocabResource vocabJsonObject;
@@ -69,9 +71,10 @@ public class VocabController : SpeechHandler {
 		foreignWord = transform.Find("Word Foreign").GetComponent<WordController>();
 		englishDefinition = transform.Find("Definition English").GetComponent<WordController>();
 		foreignDefinition = transform.Find("Definition Foreign").GetComponent<WordController>();
-		image = transform.Find("Vocab Image").GetComponent<SpriteRenderer>();
+		image = transform.Find("Vocab Image").GetComponent<Image>();
 		foreignHelpIcon = transform.Find("Help Foreign").GetComponent<HelpController>();
 		uiController = GameObject.Find("Canvas").GetComponent<VocabUIController>();
+		resultAnimation = GameObject.Find("Result Animation");
 
 		SetupLanguageHelp();
 
@@ -138,6 +141,8 @@ public class VocabController : SpeechHandler {
 		GameState.Instance.SpeechEnabled = (speech == 1);
 		UnityEngine.Object.FindObjectOfType<VoiceControlManager>().Enabled = (speech == 1);
 
+		resultAnimation.SetActive(false);
+
 		if (currentIndex + i > -1 && currentIndex + i < vocabJsonObject.Length)
 		{
 			// advance the vocab index
@@ -178,9 +183,7 @@ public class VocabController : SpeechHandler {
 		if (foreignHelp == 0)
 		{
 			foreignWord.gameObject.SetActive(true);
-			foreignWord.UpdateSize();
 			foreignDefinition.gameObject.SetActive(true);
-			foreignDefinition.UpdateSize();
 			foreignHelpIcon.gameObject.SetActive(false);
 		}
 	}
@@ -206,6 +209,7 @@ public class VocabController : SpeechHandler {
 		AudioPlaybackManager.PlaySound(audioPath);
 		if (GameState.Instance.ActiveRound != 4)
 		{
+			Debug.Log("PlaySound");
 			uiController.EnableForward();
 		}
 	}
@@ -213,14 +217,22 @@ public class VocabController : SpeechHandler {
 	public override void OnSpeechResults(string[] results)
 	{
 		// TODO
+		bool correct = false;
 		foreach (string s in results)
 		{
 			if (s.Contains(englishWord.word))
 			{
-				uiController.EnableForward();
+				correct = true;
 			}
-
 		}
+		if (correct)
+		{
+			uiController.EnableForward();
+		}
+
+		resultAnimation.SetActive(true);
+		resultAnimation.GetComponent<AnimationController>().SetSprite(correct? 0 : 1);
+		resultAnimation.GetComponent<AnimationController>().Play();
 	}
 
 }

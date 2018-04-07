@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HelpController : MonoBehaviour {
 
 	public string word;
 
 	private VocabController vocabController;
-	private TextMesh textMesh;
+	private Text text;
 	private BoxCollider2D box;
 
 	void Awake() {
-		vocabController = GameObject.Find("Vocab Container").GetComponent<VocabController>();
-		textMesh = GetComponent<TextMesh>();
+		vocabController = UnityEngine.Object.FindObjectOfType<VocabController>();
+		text = GetComponent<Text>();
 		box = GetComponent<BoxCollider2D>();
 		UpdateWord("?");
 	}
@@ -23,22 +24,10 @@ public class HelpController : MonoBehaviour {
 	public void UpdateWord(string word)
 	{
 		this.word = word;
-		textMesh.text = word;
-		UpdateSize();
+		text.text = word;
 	}
 
-
-	/// <summary>
-	/// Also resizes the box collider so it is always the same size as the displayed word.
-	/// </summary>
-	public void UpdateSize()
-	{
-	// Update the collider size to match the word size.
-	var bounds = textMesh.GetComponent<Renderer>().bounds;
-	box.size = bounds.size / transform.localScale.x;
-	}
-
-	void OnMouseUp()
+	public void OnPointerUp()
 	{
 		vocabController.ShowLanguageHelp();
 	}

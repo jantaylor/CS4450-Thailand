@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MatchGameUIController : MonoBehaviour {
 
-	public MatchGameController vocabGameController;
+	public MatchGameController matchGameController;
 
 	private GameObject forwardButton;
 	private GameObject backButton;
@@ -13,7 +13,7 @@ public class MatchGameUIController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		vocabGameController = GetComponent<MatchGameController>();
+		matchGameController = GetComponent<MatchGameController>();
 		forwardButton = transform.Find("Arrow Right").gameObject;
 		backButton = transform.Find("Arrow Left").gameObject;
 		checkButton = transform.Find("Check").gameObject;
@@ -23,37 +23,32 @@ public class MatchGameUIController : MonoBehaviour {
 		isLastVocab = false;
 	}
 
-	void OnClick(MonoBehaviour sender)
-	{
-		GameObject gameObject = sender.GetComponent<GameObject>();
-		if (gameObject.name == "Arrow Right")
-		{
-			vocabGameController.Proceed(1);
-		}
-		if (gameObject.name == "Arrow Left")
-		{
-			vocabGameController.Proceed(-1);
-		}
-	}
-
-	public void Back()
-	{
-		if (!vocabGameController.Proceed(-1))
-		{
-			backButton.SetActive(false);
-		}
-		checkButton.SetActive(false);
-		forwardButton.SetActive(true);
-	}
+	// public void Back()
+	// {
+	// 	if (!matchGameController.Proceed(-1))
+	// 	{
+	// 		backButton.SetActive(false);
+	// 	}
+	// 	checkButton.SetActive(false);
+	// 	forwardButton.SetActive(true);
+	// }
 
 	public void Forward()
 	{
-		if (!vocabGameController.Proceed(1))
-		{
-			isLastVocab = true;
-		}
+		matchGameController.Proceed();
 		forwardButton.SetActive(false);
-		backButton.SetActive(true);
+	}
+
+	public void EnableForward(bool finished)
+	{
+		if (finished)
+		{
+			checkButton.SetActive(true);
+		}
+		else
+		{
+			forwardButton.SetActive(true);
+		}
 	}
 
 	public void Match()

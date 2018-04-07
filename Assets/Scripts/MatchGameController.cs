@@ -9,10 +9,16 @@ public class MatchGameController : MonoBehaviour {
 	public GameObject optionPrefab;
 	public List<GameObject> options;
 	public GameObject optionsContainer;
+	public int GameCount = 1;
 
 	private MatchGameUIController gameUIController;
 	private VocabResource vocabResource;
 	private MatchGameOption selected;
+	private GameObject resultAnimation;
+	private int numOptions;
+	private int numMatches;
+	private int gamesCompleted = 0;
+
 
 	/// <sumamry>
 	/// The index of the current vocab word (0, 1, ... - not the actual randomized index)
@@ -28,6 +34,7 @@ public class MatchGameController : MonoBehaviour {
 	{
 		gameUIController = GetComponent<MatchGameUIController>();
 		optionsContainer = GameObject.Find("Game Options Container");
+		resultAnimation = GameObject.Find("Result Animation");
 		currentIndex = 0;
 	}
 
@@ -35,8 +42,7 @@ public class MatchGameController : MonoBehaviour {
 	{
 		LoadJson();
 		languageIndex = Array.FindIndex(vocabResource.languages, language => language.Equals(GameState.Instance.ActiveLanguage));
-		SetupGame();
-		Proceed(0);
+		Proceed();
 	}
 
 	void LoadJson()
@@ -47,7 +53,6 @@ public class MatchGameController : MonoBehaviour {
 
 	void SetupGame()
 	{
-		int numOptions;
 		switch (GameState.Instance.ActiveRound)
 		{
 			case 1: numOptions = 8; break;
@@ -58,48 +63,23 @@ public class MatchGameController : MonoBehaviour {
 		// numOptions = (numOptions / 2 > vocabResource.Length)? vocabResource.Length : numOptions / 2;
 		Debug.Log("Number of options: " + numOptions);
 
-		for (int i = 0; i < numOptions; i++)
+		if (options.Count == 0)
 		{
-			var option = Instantiate(optionPrefab) as GameObject;
-			option.transform.SetParent(optionsContainer.transform);
-			options.Add(option);
+			for (int i = 0; i < numOptions; i++)
+			{
+				var option = Instantiate(optionPrefab) as GameObject;
+				option.transform.SetParent(optionsContainer.transform);
+				options.Add(option);
+			}
 		}
-
-
-		// Attempt to center the GridLayoutGroup:
-
-		// With the GridLayoutGroup, it does a weird thing with how many columns it populates based on how many objects there are:
-		// 1:1, 2:2, 3:3, 4:4, 5:3, 6:3, 7:4, 8:4, 9:3, 10+:4
-		// This line has a formula that determines that without having a nasty if-else chain or switch statement.
-		int numCols = numOptions <= 4? numOptions : ((numOptions % 4 == 0 || numOptions >= (1 + (int)(numOptions/4)) * 4 - (int)(numOptions/4))? 4 : 3);
-		int numRows = (int)((numOptions - 1) / 4) + 1;
-
-		// Calculates the new position:
-		// x = half of the canvas width - half of the width of one column (130 / 2) times the number of columns
-		// y = initial y + half of the height of one row (130 / 2) times one less than the number of rows.
-		// Vector2 newPos = new Vector2(((RectTransform)(optionsContainer.transform.parent)).rect.width / 2 - numCols * 130 / 2, optionsContainer.transform.position.y + 130 / 2 * (numRows - 1)) * transform.localScale.x;
-		// Debug.Log(newPos);
-		// NOTE: Look at the console log for this line then at the x and y position of the "Game Options Container" and tell me why they don't match...
-
-		// optionsContainer.transform.position = newPos;
 	}
 
-	/// <sumamry>
-	/// Moves to the next vocab word
-	/// </sumamry>
-	public bool Proceed(int change)
+	public void Proceed()
 	{
-		if (currentIndex + change > -1 && currentIndex + change < vocabResource.Length)
-		{
-			currentIndex += change;
-			PopulateOptions();
-			// PopulatePrompt();
-			return (currentIndex + change > -1 && currentIndex + change < vocabResource.Length);
-		}
-		else
-		{
-			return false;
-		}
+		resultAnimation.SetActive(false);
+		numMatches = 0;
+		SetupGame();
+		PopulateOptions();
 	}
 
 	/// <sumamry>
@@ -211,9 +191,15 @@ public class MatchGameController : MonoBehaviour {
 			// For the sake of concurrency, set the selected one to a different variable and clear the "selected" variable.
 			MatchGameOption option2 = selected;
 			selected = null;
+			bool correct = option2.EnglishWord == option.EnglishWord;
+
+			// Show the "Correct"/"Wrong" Animation;
+			resultAnimation.SetActive(true);
+			resultAnimation.GetComponent<AnimationController>().SetSprite(correct? 0 : 1);
+			resultAnimation.GetComponent<AnimationController>().Play();
 
 			// If there is a match:
-			if (option2.EnglishWord == option.EnglishWord)
+			if (correct)
 			{
 				// Wait 2 sec.
 				yield return new WaitForSeconds(2);
@@ -222,6 +208,14 @@ public class MatchGameController : MonoBehaviour {
 				option.Display(MatchGameOption.DISPLAY_HIDDEN);
 				option2.Display(MatchGameOption.DISPLAY_HIDDEN);
 				option2 = null;
+				numMatches++;
+
+				// If they've got them all:
+				if (numMatches * 2 >= numOptions)
+				{
+					bool finished = (++gamesCompleted >= GameCount);
+					gameUIController.EnableForward(finished);
+				}
 			}
 
 			// If there is not a match:

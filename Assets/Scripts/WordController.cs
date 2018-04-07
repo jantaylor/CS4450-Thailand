@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WordController : MonoBehaviour {
 
@@ -9,16 +10,14 @@ public class WordController : MonoBehaviour {
 
 	private VocabController vocabController;
 	private GameObject audioButton;
-	private AudioSource audioPlayer;
-	private TextMesh textMesh;
+	private Text uiText;
 	private BoxCollider2D box;
 	private string audioPath;
 
 	void Awake() {
-		vocabController = GameObject.Find("Vocab Container").GetComponent<VocabController>();
+		vocabController = GameObject.FindObjectOfType<VocabController>();
 		audioButton = transform.Find("Word Audio Button").gameObject;
-		audioPlayer = GameObject.Find("Audio Player").GetComponent<AudioSource>();
-		textMesh = GetComponent<TextMesh>();
+		uiText = GetComponent<Text>();
 		box = GetComponent<BoxCollider2D>();
 	}
 
@@ -33,24 +32,9 @@ public class WordController : MonoBehaviour {
 	public void UpdateWord(string word, string audioPath)
 	{
 		this.word = word;
-		textMesh.text = word;
+		uiText.text = word;
 		audioClip = Resources.Load<AudioClip>(audioPath);
 		this.audioPath = audioPath;
-		UpdateSize();
-	}
-
-
-	/// <summary>
-	/// Also resizes the box collider so it is always the same size as the displayed word.
-	/// </summary>
-	public void UpdateSize()
-	{
-	// Update the collider size to match the word size.
-	var bounds = textMesh.GetComponent<Renderer>().bounds;
-	box.size = bounds.size / transform.localScale.x;
-
-	// move the audio icon to the end of the word
-	audioButton.transform.position = new Vector2((float)(box.bounds.size.x / 2 + audioButton.GetComponent<Renderer>().bounds.size.x / 2 * 1.5), (float)audioButton.transform.position.y);
 	}
 
 	/// <summary>
@@ -67,10 +51,5 @@ public class WordController : MonoBehaviour {
 		{
 			AudioPlaybackManager.PlaySound(audioPath);
 		}
-	}
-
-	void OnMouseUp()
-	{
-		PlaySound();
 	}
 }

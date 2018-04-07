@@ -30,8 +30,7 @@ public class VocabGameOption : MonoBehaviour {
 
 	void Awake()
 	{
-		gameController = GameObject.Find("Vocab Container").GetComponent<VocabGameController>();
-		audioPlayer = GameObject.Find("Audio Player").GetComponent<AudioSource>();
+		gameController = GameObject.Find("Vocab Game UI").GetComponent<VocabGameController>();
 		text = gameObject.GetComponentInChildren<Text>();
 		image = gameObject.GetComponentInChildren<Image>();
 	}
@@ -43,6 +42,7 @@ public class VocabGameOption : MonoBehaviour {
 	{
 		text.text = "";
 		image.sprite = null;
+		image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 
 		switch (displayType)
 		{
@@ -53,11 +53,9 @@ public class VocabGameOption : MonoBehaviour {
 			case DISPLAY_HIDDEN:
 				text.text = "";
 				image.sprite = Resources.Load<Sprite>("_transparent");
-				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 				break;
 			case DISPLAY_IMAGE:
 				image.sprite = Resources.Load<Sprite>(ImagePath);
-				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 				audioClip = Resources.Load<AudioClip>(EnglishAudioPath);
 				break;
 			case DISPLAY_FOREIGN:
