@@ -38,11 +38,11 @@ public class VoiceControlManager : MonoBehaviour {
 		}
 	}
 
-	private bool enabled;
+	private bool isEnabled;
 	public bool Enabled {
-		get { return enabled; }
+		get { return isEnabled; }
 		set {
-			enabled = value;
+			isEnabled = value;
 			if (value) {
 				startSpeech.GetComponent<Image>().sprite = enabledSprite;
 			}

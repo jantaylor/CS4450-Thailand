@@ -50,6 +50,7 @@ public class VocabController : SpeechHandler {
 	private HelpController foreignHelpIcon;
 	private VocabUIController uiController;
 	private GameObject resultAnimation;
+	private VoiceControlManager voiceControlManager;
 
 	private string vocabJsonFile;
 	private VocabResource vocabJsonObject;
@@ -75,6 +76,7 @@ public class VocabController : SpeechHandler {
 		foreignHelpIcon = transform.Find("Help Foreign").GetComponent<HelpController>();
 		uiController = GameObject.Find("Canvas").GetComponent<VocabUIController>();
 		resultAnimation = GameObject.Find("Result Animation");
+		voiceControlManager = GameObject.FindObjectOfType<VoiceControlManager>();
 
 		SetupLanguageHelp();
 
@@ -207,16 +209,14 @@ public class VocabController : SpeechHandler {
 	public void PlaySound(string audioPath)
 	{
 		AudioPlaybackManager.PlaySound(audioPath);
-		if (GameState.Instance.ActiveRound != 4)
+		if (GameState.Instance.ActiveRound != 4 || !voiceControlManager.Enabled)
 		{
-			Debug.Log("PlaySound");
 			uiController.EnableForward();
 		}
 	}
 
 	public override void OnSpeechResults(string[] results)
 	{
-		// TODO
 		bool correct = false;
 		foreach (string s in results)
 		{

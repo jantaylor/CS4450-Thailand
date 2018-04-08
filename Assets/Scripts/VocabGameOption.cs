@@ -8,10 +8,8 @@ public class VocabGameOption : MonoBehaviour {
 	private Text text;
 	private Image image;
 	private VocabGameController gameController;
-	private AudioClip audioClip;
-	private AudioSource audioPlayer;
-	private bool touchEnabled;
-	private bool speechEnabled;
+	// private bool touchEnabled;
+	// private bool speechEnabled;
 
 
 	public string EnglishWord {get; set;}
@@ -19,6 +17,7 @@ public class VocabGameOption : MonoBehaviour {
 	public string ImagePath {get; set;}
 	public string EnglishAudioPath {get; set;}
 	public string ForeignAudioPath {get; set;}
+	public int DisplayType {get; set;}
 
 	public const int DISPLAY_WRONG = -1;
 	public const int DISPLAY_HIDDEN = 0;
@@ -40,6 +39,7 @@ public class VocabGameOption : MonoBehaviour {
 	/// </summary>
 	public void Display(int displayType)
 	{
+		DisplayType = displayType;
 		text.text = "";
 		image.sprite = null;
 		image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
@@ -56,31 +56,31 @@ public class VocabGameOption : MonoBehaviour {
 				break;
 			case DISPLAY_IMAGE:
 				image.sprite = Resources.Load<Sprite>(ImagePath);
-				audioClip = Resources.Load<AudioClip>(EnglishAudioPath);
 				break;
 			case DISPLAY_FOREIGN:
 				text.text = ForeignWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
-				audioClip = Resources.Load<AudioClip>(ForeignAudioPath);
 				break;
 			case DISPLAY_ENGLISH:
 				text.text = EnglishWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
-				audioClip = Resources.Load<AudioClip>(EnglishAudioPath);
 				break;
-			case DISPLAY_ENGLISH_SPEECH:
-				text.text = EnglishWord;
-				image.sprite = Resources.Load<Sprite>("_transparent");
-				touchEnabled = false;
-				speechEnabled = true;
-				audioClip = Resources.Load<AudioClip>(EnglishAudioPath);
-				break;
+			// case DISPLAY_ENGLISH_SPEECH:
+			// 	text.text = EnglishWord;
+			// 	image.sprite = Resources.Load<Sprite>("_transparent");
+			// 	touchEnabled = false;
+			// 	speechEnabled = true;
+			// 	break;
 		}
 	}
 
 	public void CheckMatch()
 	{
-		AudioPlaybackManager.PlaySound(EnglishAudioPath);
+		switch (DisplayType)
+		{
+			case DISPLAY_FOREIGN: AudioPlaybackManager.PlaySound(ForeignAudioPath); break;
+			default: AudioPlaybackManager.PlaySound(EnglishAudioPath); break;
+		}
 		gameController.CheckMatch(EnglishWord);
 	}
 }

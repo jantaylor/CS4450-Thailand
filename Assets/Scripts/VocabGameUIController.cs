@@ -71,8 +71,8 @@ public class VocabGameUIController : MonoBehaviour {
 	public void Finish()
 	{
 		// TODO: Gamestate save progress
-		GameState.Instance.LoadScene(GameState.ACTIVITY_MATCH_GAME, GameState.Instance.ActiveRound);
 		// Menu();
+		GameState.Instance.LoadScene(GameState.ACTIVITY_MATCH_GAME, GameState.Instance.ActiveRound);
 	}
 
 	public void Menu()

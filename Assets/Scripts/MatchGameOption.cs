@@ -8,30 +8,13 @@ public class MatchGameOption : MonoBehaviour {
 	private Text text;
 	private Image image;
 	private MatchGameController gameController;
-	private AudioClip audioClip;
-	private AudioSource audioPlayer;
-	private bool touchEnabled;
-	private bool speechEnabled;
-	private int displayType;
-
 
 	public string EnglishWord {get; set;}
 	public string ForeignWord {get; set;}
 	public string ImagePath {get; set;}
 	public string EnglishAudioPath {get; set;}
 	public string ForeignAudioPath {get; set;}
-	public int DisplayType {
-		get { return this.displayType; }
-		set
-		{
-			this.displayType = value;
-			switch (value)
-			{
-				case DISPLAY_FOREIGN: audioClip = Resources.Load<AudioClip>(ForeignAudioPath); break;
-				default: audioClip = Resources.Load<AudioClip>(EnglishAudioPath); break;
-			}
-		}
-	}
+	public int DisplayType {get; set;}
 	public bool Enabled {get; set;}
 
 	public const int DISPLAY_BLANK = -2;
@@ -46,7 +29,6 @@ public class MatchGameOption : MonoBehaviour {
 	void Awake()
 	{
 		gameController = GameObject.Find("Match Game UI").GetComponent<MatchGameController>();
-		audioPlayer = GameObject.Find("Audio Player").GetComponent<AudioSource>();
 		text = gameObject.GetComponentInChildren<Text>();
 		image = gameObject.GetComponentInChildren<Image>();
 	}
@@ -90,12 +72,6 @@ public class MatchGameOption : MonoBehaviour {
 				text.text = EnglishWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
 				break;
-			case DISPLAY_ENGLISH_SPEECH:
-				text.text = EnglishWord;
-				image.sprite = Resources.Load<Sprite>("_transparent");
-				touchEnabled = false;
-				speechEnabled = true;
-				break;
 		}
 	}
 
@@ -115,12 +91,11 @@ public class MatchGameOption : MonoBehaviour {
 	/// </summary>
 	public void PlaySound()
 	{
-		AudioPlaybackManager.PlaySound(EnglishAudioPath);
-			// if (audioPlayer.isPlaying)
-			// {
-			// 	audioPlayer.Stop();
-			// }
-			// // audioClip.Speed = 0.5;
-			// audioPlayer.PlayOneShot(audioClip);
+		switch (DisplayType)
+		{
+			case DISPLAY_FOREIGN: AudioPlaybackManager.PlaySound(ForeignAudioPath); break;
+			default: AudioPlaybackManager.PlaySound(EnglishAudioPath); break;
+		}
 	}
+
 }

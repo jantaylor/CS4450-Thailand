@@ -9,16 +9,12 @@ public class WordController : MonoBehaviour {
 	public string word;
 
 	private VocabController vocabController;
-	private GameObject audioButton;
 	private Text uiText;
-	private BoxCollider2D box;
 	private string audioPath;
 
 	void Awake() {
 		vocabController = GameObject.FindObjectOfType<VocabController>();
-		audioButton = transform.Find("Word Audio Button").gameObject;
 		uiText = GetComponent<Text>();
-		box = GetComponent<BoxCollider2D>();
 	}
 
 	// Update is called once per frame

@@ -64,24 +64,6 @@ public class VocabGameController : MonoBehaviour {
 			option.transform.SetParent(optionsContainer.transform);
 			options.Add(option);
 		}
-
-
-		// Attempt to center the GridLayoutGroup:
-
-		// With the GridLayoutGroup, it does a weird thing with how many columns it populates based on how many objects there are:
-		// 1:1, 2:2, 3:3, 4:4, 5:3, 6:3, 7:4, 8:4, 9:3, 10+:4
-		// This line has a formula that determines that without having a nasty if-else chain or switch statement.
-		// int numCols = numOptions <= 4? numOptions : ((numOptions % 4 == 0 || numOptions >= (1 + (int)(numOptions/4)) * 4 - (int)(numOptions/4))? 4 : 3);
-		// int numRows = (int)((numOptions - 1) / 4) + 1;
-
-		// Calculates the new position:
-		// x = half of the canvas width - half of the width of one column (130 / 2) times the number of columns
-		// y = initial y + half of the height of one row (130 / 2) times one less than the number of rows.
-		// Vector2 newPos = new Vector2(((RectTransform)(optionsContainer.transform.parent)).rect.width / 2 - numCols * 130 / 2, optionsContainer.transform.position.y + 130 / 2 * (numRows - 1)) / transform.localScale.x;
-		// Debug.Log(newPos);
-		// NOTE: Look at the console log for this line then at the x and y position of the "Game Options Container" and tell me why they don't match...
-
-		// optionsContainer.transform.position = newPos;
 	}
 
 	/// <summary>
@@ -164,6 +146,7 @@ public class VocabGameController : MonoBehaviour {
 					temp = Array.FindIndex(wordIndices, value => value == j);
 				} catch (ArgumentNullException e)
 				{
+					Debug.Log(e);
 					temp = -1;
 				}
 			}	while (temp != -1);

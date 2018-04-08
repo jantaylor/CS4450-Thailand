@@ -11,7 +11,6 @@ public class SpeedControlManager : MonoBehaviour {
 	public Sprite mediumSprite;
 	public Sprite fastSprite;
 
-	private Text debugText;
 	private GameObject speedOpener;
 	private GameObject speedPanel;
 	private GameObject speedSlow;
@@ -35,14 +34,6 @@ public class SpeedControlManager : MonoBehaviour {
 		speedSlow = transform.GetChild(2).gameObject;
 		speedFast = transform.GetChild(3).gameObject;
 		UpdateSpeedUI();
-
-		#if UNITY_EDITOR
-		GameObject debugObject = GameObject.Find("DebugMesh");
-		if (debugObject != null)
-		{
-			debugText = debugObject.GetComponent<Text>();
-		}
-		#endif
 	}
 
 	#region GUI

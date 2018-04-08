@@ -9,12 +9,10 @@ public class HelpController : MonoBehaviour {
 
 	private VocabController vocabController;
 	private Text text;
-	private BoxCollider2D box;
 
 	void Awake() {
 		vocabController = UnityEngine.Object.FindObjectOfType<VocabController>();
 		text = GetComponent<Text>();
-		box = GetComponent<BoxCollider2D>();
 		UpdateWord("?");
 	}
 

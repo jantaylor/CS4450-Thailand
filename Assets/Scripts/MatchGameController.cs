@@ -60,8 +60,7 @@ public class MatchGameController : MonoBehaviour {
 			case 3: numOptions = 10; break;
 			default: numOptions = 12; break;
 		}
-		// numOptions = (numOptions / 2 > vocabResource.Length)? vocabResource.Length : numOptions / 2;
-		Debug.Log("Number of options: " + numOptions);
+		numOptions = (numOptions / 2 > vocabResource.Length)? vocabResource.Length * 2 : numOptions;
 
 		if (options.Count == 0)
 		{
@@ -104,6 +103,7 @@ public class MatchGameController : MonoBehaviour {
 					temp = Array.FindIndex(wordIndices, value => value == j);
 				} catch (ArgumentNullException e)
 				{
+					Debug.Log(e);
 					temp = -1;
 				}
 			}	while (temp != -1);
