@@ -23,6 +23,7 @@ public class Balloon : MonoBehaviour {
 
     public void Explode() {
         transform.GetChild(0).gameObject.SetActive(false);
+        gameObject.GetComponent<Rigidbody>().useGravity = true;
         gameObject.GetComponent<Rigidbody>().isKinematic = true;
         water.Play();
         isHit = true;
