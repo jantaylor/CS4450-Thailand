@@ -15,9 +15,10 @@ public class VocabUIController : MonoBehaviour {
 		vocabController = GameObject.Find("Vocab Container").GetComponent<VocabController>();
 		forwardButton = transform.Find("Arrow Right").gameObject;
 		backButton = transform.Find("Arrow Left").gameObject;
-		backButton.SetActive(false);
 		checkButton = transform.Find("Check").gameObject;
-		checkButton.SetActive(false);
+		DisableBackward();
+		// TODO: Once the mechanism is in place to call EnableForward at the right time:
+		DisableForward();
 	}
 
 	// Update is called once per frame
@@ -27,22 +28,38 @@ public class VocabUIController : MonoBehaviour {
 
 	public void Back()
 	{
-		if (!vocabController.Proceed(-1))
-		{
-			backButton.SetActive(false);
-		}
-		checkButton.SetActive(false);
-		forwardButton.SetActive(true);
+		vocabController.Proceed(-1);
+		EnableBackward();
 	}
 
 	public void Forward()
 	{
-		if (!vocabController.Proceed(1))
-		{
-			forwardButton.SetActive(false);
-			checkButton.SetActive(true);
-		}
-		backButton.SetActive(true);
+		vocabController.Proceed(1);
+		// TODO: Have a trigger to enable this.
+		DisableForward();
+		EnableBackward();
+	}
+
+	public void EnableBackward()
+	{
+		backButton.SetActive(!vocabController.IsFirst());
+	}
+
+	public void DisableBackward()
+	{
+		backButton.SetActive(false);
+	}
+
+	public void EnableForward()
+	{
+		forwardButton.SetActive(!vocabController.IsLast());
+		checkButton.SetActive(vocabController.IsLast());
+	}
+
+	public void DisableForward()
+	{
+		forwardButton.SetActive(false);
+		checkButton.SetActive(false);
 	}
 
 	public void Finish()

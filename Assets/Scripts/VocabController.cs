@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System;
 
-public class VocabController : MonoBehaviour {
+public class VocabController : SpeechHandler {
 
 	/// <summary>
 	/// activeRound is used to determine the availability of foreign language help - from GameState
@@ -47,6 +47,7 @@ public class VocabController : MonoBehaviour {
 	private WordController englishDefinition;
 	private WordController foreignDefinition;
 	private HelpController foreignHelpIcon;
+	private VocabUIController uiController;
 
 	private string vocabJsonFile;
 	private VocabResource vocabJsonObject;
@@ -70,6 +71,7 @@ public class VocabController : MonoBehaviour {
 		foreignDefinition = transform.Find("Definition Foreign").GetComponent<WordController>();
 		image = transform.Find("Vocab Image").GetComponent<SpriteRenderer>();
 		foreignHelpIcon = transform.Find("Help Foreign").GetComponent<HelpController>();
+		uiController = GameObject.Find("Canvas").GetComponent<VocabUIController>();
 
 		SetupLanguageHelp();
 
@@ -133,6 +135,8 @@ public class VocabController : MonoBehaviour {
 		foreignWord.gameObject.SetActive((foreignHelp == 1));
 		foreignDefinition.gameObject.SetActive((foreignHelp == 1));
 		foreignHelpIcon.gameObject.SetActive((foreignHelp == 0));
+		GameState.Instance.SpeechEnabled = (speech == 1);
+		UnityEngine.Object.FindObjectOfType<VoiceControlManager>().Enabled = (speech == 1);
 
 		if (currentIndex + i > -1 && currentIndex + i < vocabJsonObject.Length)
 		{
@@ -154,6 +158,16 @@ public class VocabController : MonoBehaviour {
 		{
 			return false;
 		}
+	}
+
+	public bool IsFirst()
+	{
+		return currentIndex == 0;
+	}
+
+	public bool IsLast()
+	{
+		return currentIndex + 1 == vocabJsonObject.Length;
 	}
 
 	///<summary>
@@ -184,6 +198,28 @@ public class VocabController : MonoBehaviour {
 		else
 		{
 			foreignWord.PlaySound();
+		}
+	}
+
+	public void PlaySound(string audioPath)
+	{
+		AudioPlaybackManager.PlaySound(audioPath);
+		if (GameState.Instance.ActiveRound != 4)
+		{
+			uiController.EnableForward();
+		}
+	}
+
+	public override void OnSpeechResults(string[] results)
+	{
+		// TODO
+		foreach (string s in results)
+		{
+			if (s.Contains(englishWord.word))
+			{
+				uiController.EnableForward();
+			}
+
 		}
 	}
 

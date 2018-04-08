@@ -5,6 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
 
+    public const int ACTIVITY_MENU = -1;
+    public const int ACTIVITY_VOCAB = 1;
+    public const int ACTIVITY_STORY = 2;
+    public const int ACTIVITY_GAME = 3;
+    public const int ACTIVITY_VOCAB_GAME = 4;
+    public const int ACTIVITY_MATCH_GAME = 5;
+
+    public const int AUDIO_SPEED_SLOW = 1;
+    public const int AUDIO_SPEED_MEDIUM = 2;
+    public const int AUDIO_SPEED_FAST = 3;
+
+    public const int DIFFICULTY_BEGINNER = 1;
+    public const int DIFFICULTY_INTERMEDIATE = 2;
+    public const int DIFFICULTY_ADVANCED = 3;
+
+    public const int ROUND_MENU = -1;
+
     /// <summary>
     /// Create an instance of the game state object in memory
     /// </summary>
@@ -45,6 +62,18 @@ public class GameState : MonoBehaviour {
     /// </summary>
     [SerializeField]
     private int activeDifficulty;
+
+    /// <summary>
+    /// Audio Speed currently active, 1 - slow, 2 - medium (not used), 3 - fast (normal)
+    /// </summary>
+    [SerializeField]
+    private int activeAudioSpeed;
+
+    /// <summary>
+    /// Whether the speech UI is enabled.
+    /// </summary>
+    [SerializeField]
+    private bool speechEnabled;
 
     /// <summary>
     /// List of Round Names hard coded
@@ -123,6 +152,24 @@ public class GameState : MonoBehaviour {
     }
 
     /// <summary>
+    /// Get Audio Speed and return it
+    /// </summary>
+    /// <returns>int 1-3</returns>
+    public int ActiveAudioSpeed {
+        get { return activeAudioSpeed; }
+        set { activeAudioSpeed = value; }
+    }
+
+    /// <summary>
+    /// Get speech UI enabled-ness
+    /// </summary>
+    /// <returns>bool: whether enabled or not</returns>
+    public bool SpeechEnabled {
+        get { return speechEnabled; }
+        set { speechEnabled = value; }
+    }
+
+    /// <summary>
     /// On starting the game, singleton state created
     /// </summary>
     void Awake() {
@@ -140,11 +187,12 @@ public class GameState : MonoBehaviour {
     /// </summary>
     void Start () {
         activeLanguage = "thai"; // TODO: Make this not hard-coded
-        activeActivity = -1; // -1 is menu, 1 - vocab
-        activeRound = -1; // -1 is menu, 1 is round 1
+        activeActivity = ACTIVITY_MENU; // -1 is menu, 1 - vocab
+        activeRound = ROUND_MENU; // -1 is menu, 1 is round 1
         activeScene = -1; // -1 is menu, 0 is round 1 story 1
         activeStory = "Waterfight for Songkran"; // TODO: Make this not hard-coded
-        activeDifficulty = 1; // 1 is Beginner, 2 is Intermediate, 3 is Advanced
+        activeDifficulty = DIFFICULTY_BEGINNER; // 1 is Beginner, 2 is Intermediate, 3 is Advanced
+        activeAudioSpeed = AUDIO_SPEED_FAST; // 1 is slow, 2 is medium (not used), 3 is fast (normal)
 	}
 
     /// <summary>
@@ -187,15 +235,20 @@ public class GameState : MonoBehaviour {
     /// <param name="activity">int 1-3</param>
     /// <param name="round">int 1-4</param>
     public void LoadScene(int activity, int round) {
-        // Activity: -1 - menu, 1 - vocab, 2 - story, 3 - game, 4 - vocab game
+        // Activity: -1 - menu, 1 - vocab, 2 - story, 3 - game, 4 - vocab game, 5 - match game
         // Round: -1 - menu, 1 - easy, 2 - secondary
-        if (activity == 1) {
+        if (activity == ACTIVITY_VOCAB) {
             ActiveActivity = activity;
             ActiveRound = round;
             SceneManager.LoadScene("Vocab");
-        } else if (activity == 4) {
+        }
+        else if (activity == ACTIVITY_VOCAB_GAME) {
             SceneManager.LoadScene("Vocab Game");
-        } else if (activity == 2) {
+        }
+        else if (activity == ACTIVITY_MATCH_GAME) {
+            SceneManager.LoadScene("Match Game");
+        }
+        else if (activity == ACTIVITY_STORY) {
             ActiveActivity = activity;
             ActiveRound = round;
             switch (round) {
@@ -217,10 +270,9 @@ public class GameState : MonoBehaviour {
                     break;
             }
             SceneManager.LoadScene("Round " + round + " Story 1");
-        } else if (activity == 3) {
-            if (round == 5) {
-                SceneManager.LoadScene("Bonus Game");
-            } 
+        }
+        else if (activity == ACTIVITY_GAME) {
+            // TODO
         } else {
             Debug.Log("Something went wrong. Not passing proper activity.");
             LoadMenu();

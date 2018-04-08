@@ -8,6 +8,8 @@ public class VocabGameOption : MonoBehaviour {
 	private Text text;
 	private Image image;
 	private VocabGameController gameController;
+	private AudioClip audioClip;
+	private AudioSource audioPlayer;
 	private bool touchEnabled;
 	private bool speechEnabled;
 
@@ -29,6 +31,7 @@ public class VocabGameOption : MonoBehaviour {
 	void Awake()
 	{
 		gameController = GameObject.Find("Vocab Container").GetComponent<VocabGameController>();
+		audioPlayer = GameObject.Find("Audio Player").GetComponent<AudioSource>();
 		text = gameObject.GetComponentInChildren<Text>();
 		image = gameObject.GetComponentInChildren<Image>();
 	}
@@ -50,30 +53,36 @@ public class VocabGameOption : MonoBehaviour {
 			case DISPLAY_HIDDEN:
 				text.text = "";
 				image.sprite = Resources.Load<Sprite>("_transparent");
+				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 				break;
 			case DISPLAY_IMAGE:
 				image.sprite = Resources.Load<Sprite>(ImagePath);
 				image.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+				audioClip = Resources.Load<AudioClip>(EnglishAudioPath);
 				break;
 			case DISPLAY_FOREIGN:
 				text.text = ForeignWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
+				audioClip = Resources.Load<AudioClip>(ForeignAudioPath);
 				break;
 			case DISPLAY_ENGLISH:
 				text.text = EnglishWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
+				audioClip = Resources.Load<AudioClip>(EnglishAudioPath);
 				break;
 			case DISPLAY_ENGLISH_SPEECH:
 				text.text = EnglishWord;
 				image.sprite = Resources.Load<Sprite>("_transparent");
 				touchEnabled = false;
 				speechEnabled = true;
+				audioClip = Resources.Load<AudioClip>(EnglishAudioPath);
 				break;
 		}
 	}
 
 	public void CheckMatch()
 	{
+		AudioPlaybackManager.PlaySound(EnglishAudioPath);
 		gameController.CheckMatch(EnglishWord);
 	}
 }
