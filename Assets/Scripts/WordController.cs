@@ -58,13 +58,15 @@ public class WordController : MonoBehaviour {
 	/// </summary>
 	public void PlaySound()
 	{
-		AudioPlaybackManager.PlaySound(audioPath);
-			// if (audioPlayer.isPlaying)
-			// {
-			// 	audioPlayer.Stop();
-			// }
-			// // audioClip.Speed = 0.5;
-			// audioPlayer.PlayOneShot(audioClip);
+		// vocabController will play the sound and unlock the forward progress
+		if (vocabController != null)
+		{
+			vocabController.PlaySound(audioPath);
+		}
+		else
+		{
+			AudioPlaybackManager.PlaySound(audioPath);
+		}
 	}
 
 	void OnMouseUp()

@@ -73,6 +73,7 @@ public class VoiceControlManager : MonoBehaviour {
 		panel = transform.GetChild(0).gameObject;
 		startSpeech = transform.GetChild(1).gameObject;
 		cancelSpeech = transform.GetChild(2).gameObject;
+		speechHandler = UnityEngine.Object.FindObjectOfType<SpeechHandler>();
 
 		#if UNITY_EDITOR
 		GameObject debugObject = GameObject.Find("DebugMesh");

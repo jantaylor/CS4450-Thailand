@@ -50,7 +50,9 @@ public class VocabGameController : MonoBehaviour {
 	void SetupGame()
 	{
 		int numOptions;
-		numOptions = GameState.Instance.ActiveDifficulty + GameState.Instance.ActiveRound;
+		// numOptions = GameState.Instance.ActiveDifficulty + GameState.Instance.ActiveRound;
+		numOptions = 4 + (GameState.Instance.ActiveRound - 1) / 2 * 4;
+		Debug.Log("numOptions: " + numOptions + "; vocabResource Length: " + vocabResource.Length);
 		numOptions = (numOptions > vocabResource.Length)? vocabResource.Length : numOptions;
 		numOptions = (numOptions < 2)? 2 : numOptions;
 		// numOptions += 3;
@@ -74,11 +76,11 @@ public class VocabGameController : MonoBehaviour {
 		// Calculates the new position:
 		// x = half of the canvas width - half of the width of one column (130 / 2) times the number of columns
 		// y = initial y + half of the height of one row (130 / 2) times one less than the number of rows.
-		Vector2 newPos = new Vector2(((RectTransform)(optionsContainer.transform.parent)).rect.width / 2 - numCols * 130 / 2, optionsContainer.transform.position.y + 130 / 2 * (numRows - 1));
-		Debug.Log(newPos);
+		// Vector2 newPos = new Vector2(((RectTransform)(optionsContainer.transform.parent)).rect.width / 2 - numCols * 130 / 2, optionsContainer.transform.position.y + 130 / 2 * (numRows - 1)) / transform.localScale.x;
+		// Debug.Log(newPos);
 		// NOTE: Look at the console log for this line then at the x and y position of the "Game Options Container" and tell me why they don't match...
 
-		optionsContainer.transform.position = newPos;
+		// optionsContainer.transform.position = newPos;
 	}
 
 	/// <sumamry>
