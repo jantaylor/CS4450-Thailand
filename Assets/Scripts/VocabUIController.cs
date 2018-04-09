@@ -12,12 +12,11 @@ public class VocabUIController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		vocabController = GameObject.Find("Vocab Container").GetComponent<VocabController>();
+		vocabController = GetComponent<VocabController>();
 		forwardButton = transform.Find("Arrow Right").gameObject;
 		backButton = transform.Find("Arrow Left").gameObject;
 		checkButton = transform.Find("Check").gameObject;
 		DisableBackward();
-		// TODO: Once the mechanism is in place to call EnableForward at the right time:
 		DisableForward();
 	}
 
@@ -35,7 +34,6 @@ public class VocabUIController : MonoBehaviour {
 	public void Forward()
 	{
 		vocabController.Proceed(1);
-		// TODO: Have a trigger to enable this.
 		DisableForward();
 		EnableBackward();
 	}

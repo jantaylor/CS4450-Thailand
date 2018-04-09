@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VocabGameController : MonoBehaviour {
 
@@ -11,9 +12,10 @@ public class VocabGameController : MonoBehaviour {
 	public GameObject optionsContainer;
 
 	private VocabGameUIController gameUIController;
-	private SpriteRenderer imagePrompt;
+	private Image imagePrompt;
 	private WordController wordPrompt;
 	private VocabResource vocabResource;
+	private GameObject resultAnimation;
 
 	/// <sumamry>
 	/// The index of the current vocab word (0, 1, ... - not the actual randomized index)
@@ -28,8 +30,9 @@ public class VocabGameController : MonoBehaviour {
 	void Awake()
 	{
 		gameUIController = GameObject.Find("Vocab Game UI").GetComponent<VocabGameUIController>();
-		imagePrompt = transform.Find("Image Prompt").gameObject.GetComponent<SpriteRenderer>();
+		imagePrompt = transform.Find("Image Prompt").GetComponent<Image>();
 		wordPrompt = transform.Find("Word Prompt").gameObject.GetComponent<WordController>();
+		resultAnimation = GameObject.Find("Result Animation");
 		currentIndex = 0;
 	}
 
@@ -51,11 +54,9 @@ public class VocabGameController : MonoBehaviour {
 	{
 		int numOptions;
 		// numOptions = GameState.Instance.ActiveDifficulty + GameState.Instance.ActiveRound;
-		numOptions = 4 + (GameState.Instance.ActiveRound - 1) / 2 * 4;
-		Debug.Log("numOptions: " + numOptions + "; vocabResource Length: " + vocabResource.Length);
+		numOptions = 4 + (GameState.Instance.ActiveRound - 1) / 2 * 4; // for rounds 1 and 2: 4 options, for 3 and 4: 8 options.
 		numOptions = (numOptions > vocabResource.Length)? vocabResource.Length : numOptions;
 		numOptions = (numOptions < 2)? 2 : numOptions;
-		// numOptions += 3;
 
 		for (int i = 0; i < numOptions; i++)
 		{
@@ -63,24 +64,15 @@ public class VocabGameController : MonoBehaviour {
 			option.transform.SetParent(optionsContainer.transform);
 			options.Add(option);
 		}
+	}
 
-
-		// Attempt to center the GridLayoutGroup:
-
-		// With the GridLayoutGroup, it does a weird thing with how many columns it populates based on how many objects there are:
-		// 1:1, 2:2, 3:3, 4:4, 5:3, 6:3, 7:4, 8:4, 9:3, 10+:4
-		// This line has a formula that determines that without having a nasty if-else chain or switch statement.
-		int numCols = numOptions <= 4? numOptions : ((numOptions % 4 == 0 || numOptions >= (1 + (int)(numOptions/4)) * 4 - (int)(numOptions/4))? 4 : 3);
-		int numRows = (int)((numOptions - 1) / 4) + 1;
-
-		// Calculates the new position:
-		// x = half of the canvas width - half of the width of one column (130 / 2) times the number of columns
-		// y = initial y + half of the height of one row (130 / 2) times one less than the number of rows.
-		// Vector2 newPos = new Vector2(((RectTransform)(optionsContainer.transform.parent)).rect.width / 2 - numCols * 130 / 2, optionsContainer.transform.position.y + 130 / 2 * (numRows - 1)) / transform.localScale.x;
-		// Debug.Log(newPos);
-		// NOTE: Look at the console log for this line then at the x and y position of the "Game Options Container" and tell me why they don't match...
-
-		// optionsContainer.transform.position = newPos;
+	/// <summary>
+	/// Waits for 'seconds' seconds, then calls Proceed()
+	/// </summary>
+	private IEnumerator AwaitProceed(int change, int seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		Proceed(0);
 	}
 
 	/// <sumamry>
@@ -88,6 +80,7 @@ public class VocabGameController : MonoBehaviour {
 	/// </sumamry>
 	public bool Proceed(int change)
 	{
+		resultAnimation.SetActive(false);
 		if (currentIndex + change > -1 && currentIndex + change < vocabResource.Length)
 		{
 			currentIndex += change;
@@ -122,7 +115,7 @@ public class VocabGameController : MonoBehaviour {
 				break;
 			case 3:
 				imagePrompt.gameObject.SetActive(true);
-				imagePrompt.gameObject.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>(vocabResource.GetImagePath(currentIndex));
+				imagePrompt.sprite = Resources.Load<Sprite>(vocabResource.GetImagePath(currentIndex));
 				break;
 			case 4:
 				wordPrompt.gameObject.SetActive(true);
@@ -153,6 +146,7 @@ public class VocabGameController : MonoBehaviour {
 					temp = Array.FindIndex(wordIndices, value => value == j);
 				} catch (ArgumentNullException e)
 				{
+					Debug.Log(e);
 					temp = -1;
 				}
 			}	while (temp != -1);
@@ -200,33 +194,29 @@ public class VocabGameController : MonoBehaviour {
 	/// </sumamry>
 	public void CheckMatch(string word)
 	{
-		foreach (var option in options)
+		bool correct = word == vocabResource.GetWord(0, currentIndex);
+
+		// Show the "Correct"/"Wrong" Animation;
+		resultAnimation.SetActive(true);
+		resultAnimation.GetComponent<AnimationController>().SetSprite(correct? 0 : 1);
+		resultAnimation.GetComponent<AnimationController>().Play();
+
+		if (correct)
 		{
-			// If the correct option was selected:
-			if (word == vocabResource.GetWord(0, currentIndex))
+			gameUIController.Match();
+			foreach (var option in options)
 			{
-				// If the current option is not the selected (and correct) one:
 				if (option.GetComponent<VocabGameOption>().EnglishWord != word)
 				{
 					option.GetComponent<VocabGameOption>().Display(VocabGameOption.DISPLAY_HIDDEN);
-				}
-				// If the current option is the right/selected one:
-				else
-				{
-					gameUIController.Match();
-				}
-			}
-			// If the wrong option was selected:
-			else
-			{
-				// If the current option is the selected one:
-				if (option.GetComponent<VocabGameOption>().EnglishWord == word)
-				{
-					option.GetComponent<VocabGameOption>().Display(VocabGameOption.DISPLAY_WRONG);
+
 				}
 			}
 		}
-
+		else
+		{
+			StartCoroutine(AwaitProceed(0, 1));
+		}
 	}
 
 

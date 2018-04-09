@@ -13,7 +13,7 @@ public class VocabGameUIController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		vocabGameController = GameObject.Find("Vocab Container").GetComponent<VocabGameController>();
+		vocabGameController = GetComponent<VocabGameController>();
 		forwardButton = transform.Find("Arrow Right").gameObject;
 		backButton = transform.Find("Arrow Left").gameObject;
 		checkButton = transform.Find("Check").gameObject;
@@ -71,8 +71,8 @@ public class VocabGameUIController : MonoBehaviour {
 	public void Finish()
 	{
 		// TODO: Gamestate save progress
-		GameState.Instance.LoadScene(GameState.ACTIVITY_MATCH_GAME, GameState.Instance.ActiveRound);
 		// Menu();
+		GameState.Instance.LoadScene(GameState.ACTIVITY_MATCH_GAME, GameState.Instance.ActiveRound);
 	}
 
 	public void Menu()
