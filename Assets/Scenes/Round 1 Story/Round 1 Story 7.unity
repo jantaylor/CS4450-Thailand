@@ -593,6 +593,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
+        type: 2}
+      propertyPath: sentence
+      value: Story/thai_story7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c624c15a476e9ed48824b76314abf21b, type: 2}
   m_IsPrefabParent: 0

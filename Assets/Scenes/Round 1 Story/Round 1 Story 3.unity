@@ -212,13 +212,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
-      propertyPath: menuButton
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
-        type: 2}
-      propertyPath: normalSound
-      value: 
+      propertyPath: sentence
+      value: Story/thai_story3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c624c15a476e9ed48824b76314abf21b, type: 2}
