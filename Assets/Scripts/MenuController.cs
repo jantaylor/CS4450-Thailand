@@ -4,19 +4,11 @@ using UnityEngine;
 
 public class MenuController : MonoBehaviour {
 
-    public StoryController storyController;
-
-    public void Start() {
-        storyController = FindObjectOfType<StoryController>();
-    }
-
     /// <summary>
     /// Load next scene
     /// </summary>
     public void LoadPreviousScene() {
         GameState.Instance.LoadPreviousScene();
-        storyController.sceneCompleted = false;
-        storyController.HideMenu();
     }
 
     /// <summary>
@@ -24,8 +16,6 @@ public class MenuController : MonoBehaviour {
     /// </summary>
     public void LoadNextScene() {
         GameState.Instance.LoadNextScene();
-        storyController.sceneCompleted = false;
-        storyController.HideMenu();
 	}
 
     /// <summary>

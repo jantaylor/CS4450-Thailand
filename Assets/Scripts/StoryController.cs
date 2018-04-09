@@ -23,7 +23,7 @@ public class StoryController : MonoBehaviour {
     /// <summary>
     /// Boolean for a check on if the player has completed the scene
     /// </summary>
-    public bool sceneCompleted;
+    public bool sceneCompleted = false;
 
     /// <summary>
     /// Game objects for UI Menu
@@ -41,6 +41,10 @@ public class StoryController : MonoBehaviour {
     public void Awake() {
         HideMenu();
         //PlaySentence(); // Removed on request on sprint 1
+    }
+
+    public void Start() {
+        sceneCompleted = false;
     }
 
     public void Update() {
