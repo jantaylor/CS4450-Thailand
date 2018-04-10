@@ -1973,7 +1973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f4a31b40165194ca4a59a175e2b133, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  storyController: {fileID: 0}
 --- !u!1 &932337656
 GameObject:
   m_ObjectHideFlags: 0

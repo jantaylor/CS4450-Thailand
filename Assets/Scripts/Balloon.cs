@@ -10,9 +10,13 @@ public class Balloon : MonoBehaviour {
 
     private bool isHit = false;
 
+    public AudioSource audioSource;
+
+    public AudioClip waterSFX;
+
     // Use this for initialization
     void Start () {
-		
+        audioSource = GetComponent<AudioSource>();
 	}
 	
 	// Update is called once per frame
@@ -22,11 +26,14 @@ public class Balloon : MonoBehaviour {
 	}
 
     public void Explode() {
-        transform.GetChild(0).gameObject.SetActive(false);
-        gameObject.GetComponent<Rigidbody>().useGravity = true;
-        gameObject.GetComponent<Rigidbody>().isKinematic = true;
-        water.Play();
-        isHit = true;
+        if (!isHit) {
+            transform.GetChild(0).gameObject.SetActive(false);
+            gameObject.GetComponent<Rigidbody>().useGravity = true;
+            gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            audioSource.PlayOneShot(waterSFX);
+            water.Play();
+            isHit = true;
+        }
     }
 
     private void DestroyBalloon() {
