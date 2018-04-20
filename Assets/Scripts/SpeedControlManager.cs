@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SpeedControlManager : MonoBehaviour {
 
 	public Sprite slowSprite;
-	public Sprite mediumSprite;
+	// public Sprite mediumSprite;
 	public Sprite fastSprite;
 
 	private GameObject speedOpener;
@@ -73,9 +73,9 @@ public class SpeedControlManager : MonoBehaviour {
 			case GameState.AUDIO_SPEED_SLOW:
 				speedOpener.GetComponent<Image>().sprite = slowSprite;
 				break;
-			case GameState.AUDIO_SPEED_MEDIUM:
-				speedOpener.GetComponent<Image>().sprite = mediumSprite;
-				break;
+			// case GameState.AUDIO_SPEED_MEDIUM:
+			// 	speedOpener.GetComponent<Image>().sprite = mediumSprite;
+			// 	break;
 			case GameState.AUDIO_SPEED_FAST:
 				speedOpener.GetComponent<Image>().sprite = fastSprite;
 				break;
