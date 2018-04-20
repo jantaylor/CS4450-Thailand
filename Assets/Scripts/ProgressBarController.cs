@@ -14,9 +14,20 @@ public class ProgressBarController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         // Not all scenes have progress bars
+        CurrentScene = GameState.Instance.ActiveScene + 1;
 
         // Stories are 8 scenes long
-        MaxScenes = 8f;
+        int round = GameState.Instance.ActiveRound;
+        if (round == 1)
+            MaxScenes = 8f;
+        else if (round == 2)
+            MaxScenes = 16f;
+        else if (round == 3)
+            MaxScenes = 24f;
+        else if (round == 4)
+            MaxScenes = 32f;
+        else
+            Debug.Log("Invalid Round, MaxScenes not set.");
 
         progressBar.value = CalculateProgress();
 	}
