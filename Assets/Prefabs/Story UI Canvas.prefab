@@ -524,9 +524,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7993f8b34019d754ea4278c4d057bcc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slowSprite: {fileID: 21300000, guid: 88ab04f2d0a5e894798b8912c15781d3, type: 3}
-  mediumSprite: {fileID: 21300000, guid: fceb5b3907a4d9b4695845e945b6b082, type: 3}
-  fastSprite: {fileID: 21300000, guid: cd47c02d2f3257747bdd8c824b545b41, type: 3}
+  slowSprite: {fileID: 21300000, guid: aa3cdd5c20a00ce4083c33a01f78458e, type: 3}
+  fastSprite: {fileID: 21300000, guid: 4845302d53edf53498d567e2477c3c72, type: 3}
 --- !u!114 &114315110753664358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -691,7 +690,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 88ab04f2d0a5e894798b8912c15781d3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: aa3cdd5c20a00ce4083c33a01f78458e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -958,7 +957,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: cd47c02d2f3257747bdd8c824b545b41, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4845302d53edf53498d567e2477c3c72, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
