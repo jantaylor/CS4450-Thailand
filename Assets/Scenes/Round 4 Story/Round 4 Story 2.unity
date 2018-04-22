@@ -1458,17 +1458,17 @@ Prefab:
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word
-      value: secret
+      value: Vocab/engl_uk_secret
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word2
-      value: night
+      value: Vocab/engl_uk_night
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word3
-      value: uncle
+      value: Vocab/engl_uk_uncle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c624c15a476e9ed48824b76314abf21b, type: 2}

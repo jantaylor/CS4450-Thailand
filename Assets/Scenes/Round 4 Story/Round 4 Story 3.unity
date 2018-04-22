@@ -218,12 +218,22 @@ Prefab:
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word
-      value: outside
+      value: Vocab/engl_uk_outside
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word2
-      value: talk
+      value: Vocab/engl_uk_talk
+      objectReference: {fileID: 0}
+    - target: {fileID: 224093747834807188, guid: c624c15a476e9ed48824b76314abf21b,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224093747834807188, guid: c624c15a476e9ed48824b76314abf21b,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c624c15a476e9ed48824b76314abf21b, type: 2}

@@ -653,12 +653,12 @@ Prefab:
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word
-      value: wet
+      value: Vocab/engl_uk_wet
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word2
-      value: wet
+      value: Vocab/engl_uk_wet
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}

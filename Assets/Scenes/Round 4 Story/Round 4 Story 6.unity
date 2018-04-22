@@ -218,12 +218,12 @@ Prefab:
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word
-      value: water gun
+      value: Vocab/engl_uk_water gun
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word2
-      value: water
+      value: Vocab/engl_uk_water
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c624c15a476e9ed48824b76314abf21b, type: 2}

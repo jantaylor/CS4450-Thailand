@@ -963,12 +963,12 @@ Prefab:
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word
-      value: hot
+      value: Vocab/engl_uk_hot
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
       propertyPath: word2
-      value: happy
+      value: Vocab/engl_uk_happy
       objectReference: {fileID: 0}
     - target: {fileID: 114390225179493412, guid: c624c15a476e9ed48824b76314abf21b,
         type: 2}
