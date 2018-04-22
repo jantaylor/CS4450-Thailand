@@ -1811,6 +1811,11 @@ Prefab:
       propertyPath: round
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114304335891021238, guid: c5a05bb9931e78546894971c80fd8dc1,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5a05bb9931e78546894971c80fd8dc1, type: 2}
   m_IsPrefabParent: 0
@@ -2548,6 +2553,11 @@ Prefab:
         type: 2}
       propertyPath: round
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114304335891021238, guid: c5a05bb9931e78546894971c80fd8dc1,
+        type: 2}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c5a05bb9931e78546894971c80fd8dc1, type: 2}

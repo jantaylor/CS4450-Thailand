@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1681259142980992}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.09483449}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,9 +51,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e072000fe50df94d8e79fa4ad643f83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeLanguage: 
   activeScene: -1
   activeRound: -1
   activeActivity: -1
+  activeStory: 
+  activeDifficulty: 0
+  activeAudioSpeed: 0
+  speechEnabled: 0
   scenes:
   - Round 1 Story 1
   - Round 1 Story 2
@@ -71,3 +76,19 @@ MonoBehaviour:
   - Round 2 Story 6
   - Round 2 Story 7
   - Round 2 Story 8
+  - Round 3 Story 1
+  - Round 3 Story 2
+  - Round 3 Story 3
+  - Round 3 Story 4
+  - Round 3 Story 5
+  - Round 3 Story 6
+  - Round 3 Story 7
+  - Round 3 Story 8
+  - Round 4 Story 1
+  - Round 4 Story 2
+  - Round 4 Story 3
+  - Round 4 Story 4
+  - Round 4 Story 5
+  - Round 4 Story 6
+  - Round 4 Story 7
+  - Round 4 Story 8

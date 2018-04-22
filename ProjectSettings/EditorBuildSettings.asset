@@ -69,5 +69,29 @@ EditorBuildSettings:
     path: Assets/Scenes/Round 2 Story/Round 2 Story 8.unity
     guid: 5a385e07902899b43a4e44239009f219
   - enabled: 1
+    path: Assets/Scenes/Round 4 Story/Round 4 Story 1.unity
+    guid: 1e56ffaab547f744882a38688e2f6015
+  - enabled: 1
+    path: Assets/Scenes/Round 4 Story/Round 4 Story 2.unity
+    guid: 65728845ee81a9747925424fab7f3005
+  - enabled: 1
+    path: Assets/Scenes/Round 4 Story/Round 4 Story 3.unity
+    guid: 1497b09ddb6784343bc73756408318ff
+  - enabled: 1
+    path: Assets/Scenes/Round 4 Story/Round 4 Story 4.unity
+    guid: 23f24da23469fda4d9e022bc57b56dcf
+  - enabled: 1
+    path: Assets/Scenes/Round 4 Story/Round 4 Story 5.unity
+    guid: 173f882535b10b34383ba648f1e7b632
+  - enabled: 1
+    path: Assets/Scenes/Round 4 Story/Round 4 Story 6.unity
+    guid: 58ff24e159b1edd45b2e5e698636d8be
+  - enabled: 1
+    path: Assets/Scenes/Round 4 Story/Round 4 Story 7.unity
+    guid: c71802b8c8751ed488b80ee8ae3b9807
+  - enabled: 1
+    path: Assets/Scenes/Round 4 Story/Round 4 Story 8.unity
+    guid: d257db0d2e1217f46a92544deadfdd5c
+  - enabled: 1
     path: Assets/Scenes/Match Game.unity
     guid: c452a6d755a61a5439c8a3b76f025ffc
