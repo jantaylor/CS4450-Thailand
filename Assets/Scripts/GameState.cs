@@ -95,7 +95,23 @@ public class GameState : MonoBehaviour {
         "Round 2 Story 5",
         "Round 2 Story 6",
         "Round 2 Story 7",
-        "Round 2 Story 8"
+        "Round 2 Story 8",
+        "Round 3 Story 1",
+        "Round 3 Story 2",
+        "Round 3 Story 3",
+        "Round 3 Story 4",
+        "Round 3 Story 5",
+        "Round 3 Story 6",
+        "Round 3 Story 7",
+        "Round 3 Story 8",
+        "Round 4 Story 1",
+        "Round 4 Story 2",
+        "Round 4 Story 3",
+        "Round 4 Story 4",
+        "Round 4 Story 5",
+        "Round 4 Story 6",
+        "Round 4 Story 7",
+        "Round 4 Story 8"
     };
 
     /// <summary>
@@ -259,9 +275,11 @@ public class GameState : MonoBehaviour {
                     ActiveScene = 8;
                     break;
                 case 3:
+                    ActiveLanguage = "english";
                     ActiveScene = 16;
                     break;
                 case 4:
+                    ActiveLanguage = "english";
                     ActiveScene = 24;
                     break;
                 default:
